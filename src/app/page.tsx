@@ -1,10 +1,11 @@
 import { Button } from '@/components/shared/Button/Button';
+import { Heading } from '@/components/shared/Heading/Heading';
 
 const Home: React.FC = () => (
   <div>
-    <Button isDisabled isActive>
-      ClickMe
-    </Button>
+    <Heading />
+
+    <Button isActive>ClickMe</Button>
   </div>
 );
 

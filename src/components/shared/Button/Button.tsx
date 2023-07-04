@@ -16,14 +16,17 @@ export const Button: React.FC<PropsWithChildren<IButtonProps>> = ({ children, on
     onClick?.();
   };
 
+  console.log({ isDisabled, isActive });
+
   return (
     <button
       onClick={handleClick}
       className={cn(
-        // { ['border-black hover:bg-black hover:text-white']: !isDisabled },
-        'flex justify-center border-2 border-black items-center w-full h-10 ml-4 bg-black text-white text-base hover:bg-white hover:text-black transition-colors ease-in-out duration-300',
+        'flex justify-center border-2 border-black items-center w-full h-10 text-base transition-colors ease-in-out duration-300',
+        { ['hover:bg-white hover:text-black']: !isDisabled && !isActive },
+        { ['opacity-50 hover:text-white hover:bg-black cursor-default bg-black text-white']: isDisabled },
+        { ['bg-black text-white hover:bg-white hover:text-black']: !isActive && !isDisabled },
         { ['bg-white text-black hover:bg-black hover:text-white']: isActive && !isDisabled },
-        { ['opacity-50 hover:bg-black hover:text-white cursor-default']: isDisabled },
       )}
     >
       {children}
