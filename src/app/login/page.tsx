@@ -9,7 +9,7 @@ import { INVALID_EMAIL_ERROR, INVALID_PASSWORD_ERROR } from '@/constants/errors.
 import { validateEmail } from '@/utils/validateEmail';
 import { validatePassword } from '@/utils/validatePassword';
 
-const SignUp: React.FC = () => {
+const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isEmailTouched, setIsEmailTouched] = useState(false);
@@ -83,21 +83,14 @@ const SignUp: React.FC = () => {
       />
 
       <Button disabled={!isFormValid} type="submit">
-        signup
+        login
       </Button>
 
-      <div className="mt-2 flex justify-between">
+      <div className="mt-2">
         <p>
-          Have an account? –{' '}
-          <Link href="/login" className="underline">
-            login
-          </Link>
-        </p>
-
-        <p>
-          Forgot your password? –{' '}
-          <Link href="/forgot-password" className="underline">
-            reset password
+          Don't have an account? –{' '}
+          <Link href="/signup" className="underline">
+            signup
           </Link>
         </p>
       </div>
@@ -105,4 +98,4 @@ const SignUp: React.FC = () => {
   );
 };
 
-export default SignUp;
+export default Login;
