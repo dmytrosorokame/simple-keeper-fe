@@ -2,18 +2,23 @@
 
 import Button from '@/components/shared/Button';
 import Heading from '@/components/shared/Heading';
-import Input from '@/components/shared/Input';
 
-const Home: React.FC = () => (
-  <>
-    <Heading />
+const Home: React.FC = () => {
+  return (
+    <>
+      <Heading />
 
-    <Input value="" onChange={console.log} placeholder="email" />
+      <div className="mb-5">
+        <Button>expenses</Button>
+      </div>
 
-    <Input value="" onChange={console.log} placeholder="password" />
+      <div className="mb-5">
+        <Button>categories</Button>
+      </div>
 
-    <Button>signup</Button>
-  </>
-);
+      <Button isOutlined>logout</Button>
+    </>
+  );
+};
 
 export default Home;
