@@ -53,7 +53,7 @@ const Select: React.FC<ISelectProps> = ({ options, onChange, value }) => {
       </button>
 
       {isOpen && (
-        <ul
+        <div
           tabIndex={-1}
           role="listbox"
           aria-labelledby="listbox-label"
@@ -61,18 +61,15 @@ const Select: React.FC<ISelectProps> = ({ options, onChange, value }) => {
           className="absolute w-full bg-white border-black border-2 border-t-0 z-10"
         >
           {options.map((option) => (
-            <li
+            <button
               key={option}
-              id="listbox-item-0"
-              className="text-black cursor-pointer h-10 flex align-center hover:bg-gray-200"
+              className="text-black cursor-pointer h-10 flex items-center hover:bg-gray-200 w-full"
               onClick={(): void => handleSelectChange(option)}
             >
-              <div className="flex items-center">
-                <span className="ml-3 block font-normal truncate">{option}</span>
-              </div>
-            </li>
+              <span className="ml-3 block font-normal truncate">{option}</span>
+            </button>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

@@ -63,24 +63,28 @@ const Login: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Input
-        placeholder="email"
-        value={email}
-        onChange={handleEmailChange}
-        isCrossVisible={!!email}
-        onCrossClick={handleEmailClear}
-        error={emailError}
-      />
+      <div className="mb-5">
+        <Input
+          placeholder="email"
+          value={email}
+          onChange={handleEmailChange}
+          isCrossVisible={!!email}
+          onCrossClick={handleEmailClear}
+          error={emailError}
+        />
+      </div>
 
-      <Input
-        placeholder="password"
-        value={password}
-        onChange={handlePasswordChange}
-        isCrossVisible={!!password}
-        onCrossClick={handlePasswordClear}
-        error={passwordError}
-        type="password"
-      />
+      <div className="mb-5">
+        <Input
+          placeholder="password"
+          value={password}
+          onChange={handlePasswordChange}
+          isCrossVisible={!!password}
+          onCrossClick={handlePasswordClear}
+          error={passwordError}
+          type="password"
+        />
+      </div>
 
       <Button disabled={!isFormValid} type="submit">
         login

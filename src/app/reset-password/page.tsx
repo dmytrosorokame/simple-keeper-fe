@@ -44,14 +44,16 @@ const ResetPassword: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Input
-        placeholder="email"
-        value={email}
-        onChange={handleEmailChange}
-        isCrossVisible={!!email}
-        onCrossClick={handleEmailClear}
-        error={emailError}
-      />
+      <div className="mb-5">
+        <Input
+          placeholder="email"
+          value={email}
+          onChange={handleEmailChange}
+          isCrossVisible={!!email}
+          onCrossClick={handleEmailClear}
+          error={emailError}
+        />
+      </div>
 
       <Button disabled={!isFormValid} type="submit">
         reset

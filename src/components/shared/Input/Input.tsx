@@ -14,12 +14,12 @@ interface IInputProps {
 type TInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & IInputProps;
 
 const Input: React.FC<TInputProps> = ({ onCrossClick, isCrossVisible, error, ...rest }) => (
-  <div className="mb-4">
+  <div>
     <div className="relative">
       <input
         {...rest}
         className={cn(
-          'w-full h-10 pl-3 mb-1 placeholder:text-black border-2  block  outline-none',
+          'w-full h-10 pl-3 placeholder:text-black border-2 block outline-none appearance-none',
           { ['border-black focus:border-black']: !error },
           { ['border-red-400 focus:border-red']: error },
         )}
@@ -32,7 +32,7 @@ const Input: React.FC<TInputProps> = ({ onCrossClick, isCrossVisible, error, ...
       )}
     </div>
 
-    {error && <p className="text-red-400 text-sm">{error}</p>}
+    {error && <p className="text-red-400 text-sm mt-1">{error}</p>}
   </div>
 );
 
