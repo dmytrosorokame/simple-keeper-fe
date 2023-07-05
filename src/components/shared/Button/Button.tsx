@@ -1,7 +1,7 @@
 'use client';
 
-import React, { PropsWithChildren } from 'react';
 import cn from 'classnames';
+import React, { PropsWithChildren } from 'react';
 
 interface IButtonProps {
   onClick?: () => void;
@@ -9,14 +9,12 @@ interface IButtonProps {
   isActive?: boolean;
 }
 
-export const Button: React.FC<PropsWithChildren<IButtonProps>> = ({ children, onClick, isDisabled, isActive }) => {
-  const handleClick = () => {
+const Button: React.FC<PropsWithChildren<IButtonProps>> = ({ children, onClick, isDisabled, isActive }) => {
+  const handleClick = (): void => {
     if (isDisabled) return;
 
     onClick?.();
   };
-
-  console.log({ isDisabled, isActive });
 
   return (
     <button
@@ -33,3 +31,5 @@ export const Button: React.FC<PropsWithChildren<IButtonProps>> = ({ children, on
     </button>
   );
 };
+
+export default Button;

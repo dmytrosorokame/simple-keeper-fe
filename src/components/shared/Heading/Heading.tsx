@@ -1,8 +1,10 @@
 import React from 'react';
 
-export const Heading: React.FC = () => (
+const Heading: React.FC = () => (
   <div className="mb-6">
-    <h1 className="text-5xl mb-3 text-center">simple.keeper</h1>
-    <p className="text-lg text-center">just keep.nothing more</p>
+    <h1 className="text-4xl mb-2 text-center sm:text-5xl sm:mb-3">simple.keeper</h1>
+    <p className="text-sm text-center font-light sm:text-lg">just keep.nothing more</p>
   </div>
 );
+
+export default Heading;
