@@ -5,25 +5,18 @@ import React, { useMemo, useState } from 'react';
 
 import Button from '@/components/shared/Button/Button';
 import Input from '@/components/shared/Input/Input';
-import { INVALID_EMAIL_ERROR, INVALID_PASSWORD_ERROR } from '@/constants/errors.constants';
+import { INVALID_EMAIL_ERROR } from '@/constants/errors.constants';
 import { validateEmail } from '@/utils/validateEmail';
-import { validatePassword } from '@/utils/validatePassword';
 
-const SignUp: React.FC = () => {
+const ResetPassword: React.FC = () => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [isEmailTouched, setIsEmailTouched] = useState(false);
-  const [isPasswordTouched, setIsPasswordTouched] = useState(false);
 
-  const isFormValid = useMemo(() => validateEmail(email) && validatePassword(password), [email, password]);
+  const isFormValid = useMemo(() => validateEmail(email), [email]);
 
   const emailError = useMemo(
     () => (validateEmail(email) || !isEmailTouched ? null : INVALID_EMAIL_ERROR),
     [email, isEmailTouched],
-  );
-  const passwordError = useMemo(
-    () => (validatePassword(password) || !isPasswordTouched ? null : INVALID_PASSWORD_ERROR),
-    [password, isPasswordTouched],
   );
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -32,18 +25,8 @@ const SignUp: React.FC = () => {
     setIsEmailTouched(true);
   };
 
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setPassword(event.target.value);
-
-    setIsPasswordTouched(true);
-  };
-
   const handleEmailClear = (): void => {
     setEmail('');
-  };
-
-  const handlePasswordClear = (): void => {
-    setPassword('');
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
@@ -55,10 +38,8 @@ const SignUp: React.FC = () => {
     console.log('submit');
 
     handleEmailClear();
-    handlePasswordClear();
 
     setIsEmailTouched(false);
-    setIsPasswordTouched(false);
   };
 
   return (
@@ -72,23 +53,13 @@ const SignUp: React.FC = () => {
         error={emailError}
       />
 
-      <Input
-        placeholder="password"
-        value={password}
-        onChange={handlePasswordChange}
-        isCrossVisible={!!password}
-        onCrossClick={handlePasswordClear}
-        error={passwordError}
-        type="password"
-      />
-
       <Button disabled={!isFormValid} type="submit">
-        signup
+        reset
       </Button>
 
       <div className="mt-2">
         <p>
-          Have an account? –{' '}
+          Remember your password? –{' '}
           <Link href="/login" className="underline">
             login
           </Link>
@@ -98,4 +69,4 @@ const SignUp: React.FC = () => {
   );
 };
 
-export default SignUp;
+export default ResetPassword;

@@ -86,11 +86,18 @@ const Login: React.FC = () => {
         login
       </Button>
 
-      <div className="mt-2">
+      <div className="mt-2 flex justify-between">
         <p>
           Don't have an account? –{' '}
           <Link href="/signup" className="underline">
             signup
+          </Link>
+        </p>
+
+        <p>
+          Forgot your password? –{' '}
+          <Link href="/reset-password" className="underline">
+            reset password
           </Link>
         </p>
       </div>
