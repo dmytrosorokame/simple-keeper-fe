@@ -1,35 +1,28 @@
 'use client';
 
 import cn from 'classnames';
-import React, { PropsWithChildren } from 'react';
+import React, { ButtonHTMLAttributes, DetailedHTMLProps, PropsWithChildren } from 'react';
 
 interface IButtonProps {
-  onClick?: () => void;
-  isDisabled?: boolean;
   isOutlined?: boolean;
 }
 
-const Button: React.FC<PropsWithChildren<IButtonProps>> = ({ children, onClick, isDisabled, isOutlined }) => {
-  const handleClick = (): void => {
-    if (isDisabled) return;
+type TButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> & IButtonProps;
 
-    onClick?.();
-  };
-
-  return (
-    <button
-      onClick={handleClick}
-      className={cn(
-        'flex justify-center border-2 border-black items-center w-full h-10 text-base transition-colors ease-in-out duration-300',
-        { ['hover:bg-white hover:text-black']: !isDisabled && !isOutlined },
-        { ['opacity-50 hover:text-white hover:bg-black cursor-default bg-black text-white']: isDisabled },
-        { ['bg-black text-white hover:bg-white hover:text-black']: !isOutlined && !isDisabled },
-        { ['bg-white text-black hover:bg-black hover:text-white']: isOutlined && !isDisabled },
-      )}
-    >
-      {children}
-    </button>
-  );
-};
+const Button: React.FC<PropsWithChildren<TButtonProps>> = ({ children, disabled, isOutlined, ...rest }) => (
+  <button
+    disabled={disabled}
+    className={cn(
+      'flex justify-center border-2 border-black items-center w-full h-10 text-base transition-colors ease-in-out duration-300',
+      { ['hover:bg-white hover:text-black']: !disabled && !isOutlined },
+      { ['opacity-50 hover:text-white hover:bg-black cursor-default bg-black text-white']: disabled },
+      { ['bg-black text-white hover:bg-white hover:text-black']: !isOutlined && !disabled },
+      { ['bg-white text-black hover:bg-black hover:text-white']: isOutlined && !disabled },
+    )}
+    {...rest}
+  >
+    {children}
+  </button>
+);
 
 export default Button;
