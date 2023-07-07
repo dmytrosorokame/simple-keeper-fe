@@ -11,8 +11,16 @@ const Home: React.FC = () => {
     router.push('/expenses');
   };
 
+  const handleNavigateToAddExpense = (): void => {
+    router.push('/add-expense');
+  };
+
   const handleNavigateToCategories = (): void => {
     router.push('/categories');
+  };
+
+  const handleNavigateToAddCategory = (): void => {
+    router.push('/add-category');
   };
 
   return (
@@ -22,7 +30,15 @@ const Home: React.FC = () => {
       </div>
 
       <div className="mb-5">
+        <Button onClick={handleNavigateToAddExpense}>add expense</Button>
+      </div>
+
+      <div className="mb-5">
         <Button onClick={handleNavigateToCategories}>categories</Button>
+      </div>
+
+      <div className="mb-5">
+        <Button onClick={handleNavigateToAddCategory}>add category</Button>
       </div>
 
       <Button isOutlined>logout</Button>

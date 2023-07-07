@@ -1,12 +1,15 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import React, { useCallback, useState } from 'react';
 
 import Button from '@/components/shared/Button/Button';
 import Input from '@/components/shared/Input/Input';
 import Select from '@/components/shared/Select';
 
 const AddExpense: React.FC = () => {
+  const router = useRouter();
+
   const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState('food');
   const [name, setName] = useState('');
@@ -51,6 +54,10 @@ const AddExpense: React.FC = () => {
     handleCommentClear();
   };
 
+  const handleBack = useCallback(() => {
+    router.push('/');
+  }, [router]);
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-5">
@@ -89,7 +96,13 @@ const AddExpense: React.FC = () => {
         />
       </div>
 
-      <Button type="submit">add</Button>
+      <div className="mb-5">
+        <Button type="submit">add</Button>
+      </div>
+
+      <Button onClick={handleBack} isOutlined>
+        back
+      </Button>
     </form>
   );
 };
