@@ -1,5 +1,30 @@
 import React from 'react';
 
-export const ExpenseList: React.FC = () => {
-  return <div>ExpenseList</div>;
-};
+import ExpenseItem from '@/components/pages/expenses/ExpenseItem';
+import { IExpense } from '@/types/expenses';
+
+interface IExpenseListProps {
+  expenses: IExpense[];
+}
+
+const ExpenseList: React.FC<IExpenseListProps> = ({ expenses }) => (
+  <>
+    <div className="flex justify-between mb-7">
+      <p>sum</p>
+
+      <p>category</p>
+
+      <p>date</p>
+    </div>
+
+    <ul>
+      {expenses.map((expense) => (
+        <div className="mt-2" key={expense.id}>
+          <ExpenseItem expense={expense} />
+        </div>
+      ))}
+    </ul>
+  </>
+);
+
+export default ExpenseList;

@@ -25,4 +25,4 @@ const Button: React.FC<PropsWithChildren<TButtonProps>> = ({ children, disabled,
   </button>
 );
 
-export default Button;
+export default React.memo(Button);
