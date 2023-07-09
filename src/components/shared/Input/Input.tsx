@@ -3,7 +3,7 @@
 import cn from 'classnames';
 import React, { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 
-import Cross from '@/components/icons/Cross/Cross';
+import Cross from '@/components/icons/Cross';
 
 interface IInputProps {
   onCrossClick?: () => void;

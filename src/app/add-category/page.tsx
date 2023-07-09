@@ -3,8 +3,8 @@
 import { useRouter } from 'next/navigation';
 import React, { useCallback, useState } from 'react';
 
-import Button from '@/components/shared/Button/Button';
-import Input from '@/components/shared/Input/Input';
+import Button from '@/components/shared/Button';
+import Input from '@/components/shared/Input';
 
 const AddCategory: React.FC = () => {
   const router = useRouter();

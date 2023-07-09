@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import React, { useMemo, useState } from 'react';
 
-import Button from '@/components/shared/Button/Button';
-import Input from '@/components/shared/Input/Input';
+import Button from '@/components/shared/Button';
+import Input from '@/components/shared/Input';
 import { INVALID_EMAIL_ERROR, INVALID_PASSWORD_ERROR } from '@/constants/errors.constants';
 import { validateEmail } from '@/utils/validateEmail';
 import { validatePassword } from '@/utils/validatePassword';

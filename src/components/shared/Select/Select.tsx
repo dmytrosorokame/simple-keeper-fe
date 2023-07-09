@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
 
-import Arrow from '@/components/icons/Arrow/Arrow';
+import Arrow from '@/components/icons/Arrow';
 
 interface ISelectProps {
   options: string[];

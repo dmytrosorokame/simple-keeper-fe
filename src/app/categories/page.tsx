@@ -2,8 +2,8 @@
 import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react';
 
-import CategoryList from '@/components/pages/category/CategoryList/CategoryList';
-import Button from '@/components/shared/Button/Button';
+import CategoryList from '@/components/pages/category/CategoryList';
+import Button from '@/components/shared/Button';
 import { ICategory } from '@/types/categories';
 
 const CATEGORIES: ICategory[] = [
