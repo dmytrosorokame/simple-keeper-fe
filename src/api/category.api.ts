@@ -9,14 +9,14 @@ interface ICreateCategoryDto {
 export const categoryApi = createApi({
   reducerPath: 'categoryApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_API_PATH,
+    baseUrl: process.env.NEXT_PUBLIC_API_PATH,
   }),
   endpoints: (builder) => ({
     createCategory: builder.mutation<ICategory, ICreateCategoryDto>({
-      query: (createCategoryDto) => ({
+      query: (dto) => ({
         url: '/category',
         method: 'POST',
-        body: createCategoryDto,
+        body: dto,
       }),
     }),
     getAllCategories: builder.query<ICategory[], void>({

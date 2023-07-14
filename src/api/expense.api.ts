@@ -12,7 +12,7 @@ interface ICreateExpenseDto {
 export const expenseApi = createApi({
   reducerPath: 'expenseApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_API_PATH,
+    baseUrl: process.env.NEXT_PUBLIC_API_PATH,
   }),
 
   endpoints: (builder) => ({

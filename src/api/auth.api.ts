@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+import { TRootState } from '@/store/store';
+
 type TAuthDto = {
   email: string;
   password: string;
@@ -17,7 +19,16 @@ type TLoginResponse = {
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_API_PATH,
+    baseUrl: process.env.NEXT_PUBLIC_API_PATH,
+    prepareHeaders: (headers, { getState }) => {
+      const token = (getState() as TRootState).auth.accessToken;
+
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`);
+      }
+
+      return headers;
+    },
   }),
   endpoints: (builder) => ({
     signUp: builder.mutation<TSignUpResponse, TAuthDto>({

@@ -5,11 +5,13 @@ import { authApi } from '@/api/auth.api';
 import { categoryApi } from '@/api/category.api';
 import { expenseApi } from '@/api/expense.api';
 
+import authReducer from './auth/auth.slice';
 import popupReducer from './popup/popup.slice';
 
 export const store = configureStore({
   reducer: {
     popup: popupReducer,
+    auth: authReducer,
     [authApi.reducerPath]: authApi.reducer,
     [expenseApi.reducerPath]: expenseApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
