@@ -19,9 +19,11 @@ export const categoryApi = createApi({
         body: dto,
       }),
     }),
+
     getAllCategories: builder.query<ICategory[], void>({
       query: () => '/category',
     }),
+
     deleteCategory: builder.mutation<ICategory, number>({
       query: (id) => ({
         url: `/category/${id}`,
@@ -30,5 +32,3 @@ export const categoryApi = createApi({
     }),
   }),
 });
-
-export const { useCreateCategoryMutation, useGetAllCategoriesQuery, useDeleteCategoryMutation } = categoryApi;

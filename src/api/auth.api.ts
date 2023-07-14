@@ -1,20 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { TRootState } from '@/store/store';
-
-type TAuthDto = {
-  email: string;
-  password: string;
-};
-
-type TSignUpResponse = {
-  email: string;
-  userId: number;
-};
-
-type TLoginResponse = {
-  access_token: string;
-};
+import { IAuthDto, IAuthResponse } from '@/types/auth';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
@@ -31,18 +18,26 @@ export const authApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    signUp: builder.mutation<TSignUpResponse, TAuthDto>({
+    signUp: builder.mutation<IAuthResponse, IAuthDto>({
       query: (dto) => ({
         url: '/auth/sign-up',
         method: 'POST',
         body: dto,
       }),
     }),
-    login: builder.mutation<TLoginResponse, TAuthDto>({
+
+    login: builder.mutation<IAuthResponse, IAuthDto>({
       query: (dto) => ({
         url: '/auth/login',
         method: 'POST',
         body: dto,
+      }),
+    }),
+
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        url: '/auth/logout',
+        method: 'GET',
       }),
     }),
   }),

@@ -36,5 +36,3 @@ export const expenseApi = createApi({
     }),
   }),
 });
-
-export const { useCreateExpenseMutation, useDeleteExpenseMutation, useGetAllExpensesQuery } = expenseApi;
