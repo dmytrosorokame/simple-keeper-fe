@@ -7,3 +7,18 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+
+/*
+reset toastify
+*/
+.Toastify__toast {
+  border-radius: 0;
+  box-shadow: none;
+  border: 1px solid black;
+  color: black;
+}
+
+.Toastify__close-button {
+  opacity: 1;
+}

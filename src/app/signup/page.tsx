@@ -1,8 +1,11 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useMemo, useState } from 'react';
+import { toast } from 'react-toastify';
 
+import { useSignUpMutation } from '@/api/auth.api';
 import Button from '@/components/shared/Button';
 import Input from '@/components/shared/Input';
 import { INVALID_EMAIL_ERROR, INVALID_PASSWORD_ERROR } from '@/constants/errors.constants';
@@ -10,6 +13,9 @@ import { validateEmail } from '@/utils/validateEmail';
 import { validatePassword } from '@/utils/validatePassword';
 
 const SignUp: React.FC = () => {
+  const [signUp] = useSignUpMutation();
+  const router = useRouter();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isEmailTouched, setIsEmailTouched] = useState(false);
@@ -46,13 +52,21 @@ const SignUp: React.FC = () => {
     setPassword('');
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
 
     if (!isFormValid) return;
 
     // eslint-disable-next-line no-console
     console.log('submit');
+
+    const result = await signUp({ email, password });
+
+    if ('error' in result) return;
+
+    toast('You have successfully signed up!');
+
+    router.push('/login');
 
     handleEmailClear();
     handlePasswordClear();
@@ -98,6 +112,13 @@ const SignUp: React.FC = () => {
           </Link>
         </p>
       </div>
+      <button
+        onClick={() => {
+          toast('You have successfully signed up!');
+        }}
+      >
+        asd
+      </button>
     </form>
   );
 };

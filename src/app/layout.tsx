@@ -1,8 +1,10 @@
 'use client';
 import cn from 'classnames';
 import { Inter } from 'next/font/google';
+import 'react-toastify/dist/ReactToastify.css';
 import './globals.css';
 import { PropsWithChildren } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 import AppProvider from '@/components/generic/AppProvider';
 import PopupManager from '@/components/generic/PopupManager';
@@ -24,7 +26,10 @@ const RootLayout: React.FC<PropsWithChildren> = ({ children }) => (
 
           {children}
         </div>
+
         <PopupManager />
+
+        <ToastContainer hideProgressBar theme="light" autoClose={false} />
       </AppProvider>
     </body>
   </html>
