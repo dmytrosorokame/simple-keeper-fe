@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import React, { useCallback, useState } from 'react';
 
+import withAuth from '@/components/hocs/IsAuth';
 import Button from '@/components/shared/Button';
 import Input from '@/components/shared/Input';
 
@@ -55,4 +56,4 @@ const AddCategory: React.FC = () => {
   );
 };
 
-export default AddCategory;
+export default withAuth(AddCategory);

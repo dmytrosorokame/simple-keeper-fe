@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
+import withAuth from '@/components/hocs/IsAuth';
 import Button from '@/components/shared/Button';
 
 const Home: React.FC = () => {
@@ -46,4 +47,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default withAuth(Home);

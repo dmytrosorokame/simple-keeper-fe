@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react';
 
+import withAuth from '@/components/hocs/IsAuth';
 import ExpenseList from '@/components/pages/expense/ExpenseList';
 import Button from '@/components/shared/Button';
 import { IExpense } from '@/types/expenses';
@@ -31,7 +32,7 @@ const expenses: IExpense[] = [
   },
 ];
 
-const Page: React.FC = () => {
+const Expenses: React.FC = () => {
   const router = useRouter();
 
   const handleBack = useCallback(() => {
@@ -55,4 +56,4 @@ const Page: React.FC = () => {
   );
 };
 
-export default Page;
+export default withAuth(Expenses);

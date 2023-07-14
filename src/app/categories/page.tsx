@@ -2,6 +2,7 @@
 import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react';
 
+import withAuth from '@/components/hocs/IsAuth';
 import CategoryList from '@/components/pages/category/CategoryList';
 import Button from '@/components/shared/Button';
 import { ICategory } from '@/types/categories';
@@ -29,7 +30,7 @@ const CATEGORIES: ICategory[] = [
   },
 ];
 
-const Page: React.FC = () => {
+const Categories: React.FC = () => {
   const router = useRouter();
 
   const handleBack = useCallback(() => {
@@ -49,4 +50,4 @@ const Page: React.FC = () => {
   );
 };
 
-export default Page;
+export default withAuth(Categories);

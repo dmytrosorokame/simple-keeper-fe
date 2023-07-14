@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import React, { useCallback, useState } from 'react';
 
+import withAuth from '@/components/hocs/IsAuth';
 import Button from '@/components/shared/Button';
 import Input from '@/components/shared/Input';
 import Select from '@/components/shared/Select';
@@ -107,4 +108,4 @@ const AddExpense: React.FC = () => {
   );
 };
 
-export default AddExpense;
+export default withAuth(AddExpense);
