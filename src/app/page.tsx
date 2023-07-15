@@ -4,8 +4,11 @@ import { useRouter } from 'next/navigation';
 
 import WithAuth from '@/components/hocs/WithAuth/WithAuth';
 import Button from '@/components/shared/Button';
+import { logout } from '@/store/auth/auth.slice';
+import { useAppDispatch } from '@/store/store';
 
 const Home: React.FC = () => {
+  const dispatch = useAppDispatch();
   const router = useRouter();
 
   const handleNavigateToExpenses = (): void => {
@@ -22,6 +25,11 @@ const Home: React.FC = () => {
 
   const handleNavigateToAddCategory = (): void => {
     router.push('/add-category');
+  };
+
+  const handleLogout = (): void => {
+    dispatch(logout());
+    router.push('/login');
   };
 
   return (
@@ -42,7 +50,9 @@ const Home: React.FC = () => {
         <Button onClick={handleNavigateToAddCategory}>add category</Button>
       </div>
 
-      <Button isOutlined>logout</Button>
+      <Button isOutlined onClick={handleLogout}>
+        logout
+      </Button>
     </>
   );
 };

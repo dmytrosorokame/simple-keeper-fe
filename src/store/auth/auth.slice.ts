@@ -1,12 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
+import Cookies from 'js-cookie';
+
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '@/constants/cookie.constants';
 
 interface IAuthState {
   accessToken: string | null;
   refreshToken: string | null;
 }
 
-const accessToken = localStorage.getItem('accessToken') ?? null;
-const refreshToken = localStorage.getItem('refreshToken') ?? null;
+const accessToken = Cookies.get(ACCESS_TOKEN_KEY) ?? null;
+const refreshToken = Cookies.get(REFRESH_TOKEN_KEY) ?? null;
 
 const initialState: IAuthState = {
   accessToken,
@@ -21,15 +24,15 @@ const authSlice = createSlice({
       state.accessToken = null;
       state.refreshToken = null;
 
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
+      Cookies.remove(ACCESS_TOKEN_KEY);
+      Cookies.remove(REFRESH_TOKEN_KEY);
     },
     setCredentials: (state, action) => {
       state.accessToken = action.payload.accessToken;
       state.refreshToken = action.payload.refreshToken;
 
-      localStorage.setItem('accessToken', action.payload.accessToken);
-      localStorage.setItem('refreshToken', action.payload.refreshToken);
+      Cookies.set(ACCESS_TOKEN_KEY, action.payload.accessToken);
+      Cookies.set(REFRESH_TOKEN_KEY, action.payload.refreshToken);
     },
   },
 });
