@@ -1,7 +1,8 @@
 import React, { ComponentType, useEffect, useState } from 'react';
 
 import { authorizeUser } from '@/api/user.api';
-import NotAuthenticated from '@/components/generic/NotAuthenticated/NotAuthenticated';
+import NotAuthenticated from '@/components/generic/NotAuthenticated';
+import PageLoader from '@/components/shared/PageLoader';
 
 const WithAuth = (WrappedComponent: ComponentType): React.FC => {
   const WithAuthorization: React.FC = (props) => {
@@ -20,12 +21,12 @@ const WithAuth = (WrappedComponent: ComponentType): React.FC => {
         }
       };
 
-      console.log('here');
-
       authorize();
     }, []);
 
-    if (isLoading) return <p>Loading...</p>;
+    if (isLoading) {
+      return <PageLoader />;
+    }
 
     if (isError) {
       return <NotAuthenticated />;
