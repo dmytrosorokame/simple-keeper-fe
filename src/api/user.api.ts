@@ -27,17 +27,18 @@ const refreshTokens = async (refreshToken: string): Promise<IAuthResponse> => {
   return response.data;
 };
 
-export const authorizeUser = async (): Promise<IUser> => {
+export const authorizeUser = async (): Promise<IUser & IAuthResponse> => {
   try {
     const accessToken = Cookies.get('accessToken');
+    const refreshToken = Cookies.get('refreshToken');
 
-    if (!accessToken) {
-      throw new Error('Access token not found');
+    if (!accessToken || !refreshToken) {
+      throw new Error('No tokens found');
     }
 
     const userData = await fetchUserData(accessToken);
 
-    return userData;
+    return { ...userData, accessToken, refreshToken };
   } catch (error) {
     if (axios.isAxiosError(error) && error.response && error.response.status === 401) {
       const refreshToken = Cookies.get('refreshToken');
@@ -51,9 +52,8 @@ export const authorizeUser = async (): Promise<IUser> => {
 
           const userData = await fetchUserData(accessToken);
 
-          return userData;
+          return { ...userData, accessToken, refreshToken: newRefreshToken };
         } catch (refreshError) {
-          console.error('Error refreshing access token:', refreshError);
           throw new Error('Failed to refresh access token');
         }
       }
