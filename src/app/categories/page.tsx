@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react';
 
-import withAuth from '@/components/hocs/IsAuth';
+import withAuth from '@/components/hocs/WithAuth';
 import CategoryList from '@/components/pages/category/CategoryList';
 import Button from '@/components/shared/Button';
 import { ICategory } from '@/types/categories';

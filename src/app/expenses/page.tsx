@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react';
 
-import withAuth from '@/components/hocs/IsAuth';
+import withAuth from '@/components/hocs/WithAuth';
 import ExpenseList from '@/components/pages/expense/ExpenseList';
 import Button from '@/components/shared/Button';
 import { IExpense } from '@/types/expenses';
