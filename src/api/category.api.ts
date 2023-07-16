@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+import { ApiTags } from '@/constants/apiTags.constants';
 import { TRootState } from '@/store/store';
 import { ICategory } from '@/types/categories';
-
 interface ICreateCategoryDto {
   name: string;
 }
@@ -21,6 +21,7 @@ export const categoryApi = createApi({
       return headers;
     },
   }),
+  tagTypes: [ApiTags.CATEGORY],
   endpoints: (builder) => ({
     createCategory: builder.mutation<ICategory, ICreateCategoryDto>({
       query: (dto) => ({
@@ -28,10 +29,12 @@ export const categoryApi = createApi({
         method: 'POST',
         body: dto,
       }),
+      invalidatesTags: [ApiTags.CATEGORY],
     }),
 
     getAllCategories: builder.query<ICategory[], void>({
       query: () => '/category',
+      providesTags: [ApiTags.CATEGORY],
     }),
 
     deleteCategory: builder.mutation<ICategory, number>({
@@ -39,6 +42,7 @@ export const categoryApi = createApi({
         url: `/category/${id}`,
         method: 'DELETE',
       }),
+      invalidatesTags: [ApiTags.CATEGORY],
     }),
   }),
 });
