@@ -1,5 +1,7 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 
+import { useDeleteCategoryMutation } from '@/api/category.api';
 import Line from '@/components/icons/Line/';
 import IconButton from '@/components/shared/IconButton';
 import { hidePopup, showPopup } from '@/store/popup/popup.slice';
@@ -12,6 +14,7 @@ interface ICategoryItemProps {
 }
 
 const CategoryItem: React.FC<ICategoryItemProps> = ({ category }) => {
+  const [deleteCategory] = useDeleteCategoryMutation();
   const dispatch = useAppDispatch();
 
   const handleDeleteCategory = (): void => {
@@ -22,8 +25,15 @@ const CategoryItem: React.FC<ICategoryItemProps> = ({ category }) => {
           onCancel: () => {
             dispatch(hidePopup());
           },
-          onConfirm: () => {
-            alert('delete category');
+          onConfirm: async () => {
+            try {
+              await deleteCategory(category.id);
+
+              toast('Category deleted successfully!');
+            } catch (error) {
+              toast('Something went wrong!');
+            }
+
             dispatch(hidePopup());
           },
         },
