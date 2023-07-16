@@ -39,7 +39,7 @@ const AddCategory: React.FC = () => {
 
       toast('Category created successfully');
     } catch (error) {
-      toast(error.message || 'Something went wrong');
+      toast('Something went wrong');
     }
   };
 

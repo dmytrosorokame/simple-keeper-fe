@@ -3,6 +3,6 @@ export interface IIconProps {
 }
 
 export interface ISelectOption {
-  value: TSelectOptionValue;
+  value: string | number;
   label: string;
 }

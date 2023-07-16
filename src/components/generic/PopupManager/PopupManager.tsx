@@ -31,10 +31,12 @@ const PopupManager: React.FC = () => {
   useEffect(() => {
     if (hasPopupToShow) {
       window.document.body.style.overflow = 'hidden';
-      window.document.body.style['-webkit-overflow-scrolling'] = 'auto';
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window.document.body.style as any)['-webkit-overflow-scrolling'] = 'auto';
     } else {
       window.document.body.style.overflow = 'auto';
-      window.document.body.style['-webkit-overflow-scrolling'] = 'touch';
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window.document.body.style as any)['-webkit-overflow-scrolling'] = 'touch';
     }
   }, [hasPopupToShow]);
 
