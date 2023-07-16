@@ -2,14 +2,15 @@ import cn from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
 
 import Arrow from '@/components/icons/Arrow';
+import { ISelectOption } from '@/types/common';
 
 interface ISelectProps {
-  options: string[];
-  onChange?: (option: string) => void;
-  value?: string;
+  options: ISelectOption[];
+  selectedOption?: ISelectOption | null;
+  onChange?: (option: ISelectOption) => void;
 }
 
-const Select: React.FC<ISelectProps> = ({ options, onChange, value }) => {
+const Select: React.FC<ISelectProps> = ({ options, onChange, selectedOption }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const ref = useRef<HTMLDivElement>(null);
@@ -18,7 +19,7 @@ const Select: React.FC<ISelectProps> = ({ options, onChange, value }) => {
     setIsOpen((prevState) => !prevState);
   };
 
-  const handleSelectChange = (option: string): void => {
+  const handleSelectChange = (option: ISelectOption): void => {
     onChange?.(option);
 
     setIsOpen(false);
@@ -47,7 +48,7 @@ const Select: React.FC<ISelectProps> = ({ options, onChange, value }) => {
         className="w-full border-2 border-black h-10 flex items-center pl-3 relative"
         onClick={handleToggle}
       >
-        {value}
+        {selectedOption?.label || 'Select'}
 
         <Arrow className={cn('absolute right-3 top-1/2 -translate-y-1/2', { ['rotate-180']: isOpen })} />
       </button>
@@ -62,11 +63,11 @@ const Select: React.FC<ISelectProps> = ({ options, onChange, value }) => {
         >
           {options.map((option) => (
             <button
-              key={option}
+              key={option.value}
               className="text-black cursor-pointer h-10 flex items-center hover:bg-gray-200 w-full"
               onClick={(): void => handleSelectChange(option)}
             >
-              <span className="ml-3 block font-normal truncate">{option}</span>
+              <span className="ml-3 block font-normal truncate">{option.label}</span>
             </button>
           ))}
         </div>

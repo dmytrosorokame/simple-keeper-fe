@@ -33,21 +33,21 @@ export const expenseApi = createApi({
   endpoints: (builder) => ({
     createExpense: builder.mutation<IExpense, ICreateExpenseDto>({
       query: (dto) => ({
-        url: '/expense',
+        url: '/expenses',
         method: 'POST',
         body: dto,
       }),
       invalidatesTags: [ApiTags.EXPENSE],
     }),
 
-    getAllExpenses: builder.query({
-      query: () => '/expense',
+    getAllExpenses: builder.query<IExpense[], void>({
+      query: () => '/expenses',
       providesTags: [ApiTags.EXPENSE],
     }),
 
-    deleteExpense: builder.mutation({
+    deleteExpense: builder.mutation<IExpense, void>({
       query: (id) => ({
-        url: `/expense/${id}`,
+        url: `/expenses/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: [ApiTags.EXPENSE],
@@ -55,4 +55,4 @@ export const expenseApi = createApi({
   }),
 });
 
-export const { useCreateExpenseMutation, useGetAllExpensesQuery, useDeleteExpenseMutation } = expenseApi;
+export const { useCreateExpenseMutation, useGetAllExpensesQuery } = expenseApi;

@@ -1,24 +1,23 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
+import { useGetAllCategoriesQuery } from '@/api/category.api';
 import { IExpense } from '@/types/expenses';
 import { formatDate } from '@/utils/date';
-
-const EXPENSES: Record<number, string> = {
-  1: 'Food',
-  2: 'Transport',
-  3: 'Entertainment',
-  4: 'Health',
-  5: 'Other',
-};
 
 interface IExpenseItemProps {
   expense: IExpense;
 }
 
 const ExpenseItem: React.FC<IExpenseItemProps> = ({ expense }) => {
-  const formattedDate = formatDate(expense.date);
+  const { data: categories } = useGetAllCategoriesQuery();
 
-  const category = EXPENSES[expense.categoryId];
+  const category = useMemo(() => {
+    const category = categories?.find((category) => category.id === expense.categoryId);
+
+    return category ? category.name : '';
+  }, [categories, expense]);
+
+  const formattedDate = formatDate(expense.createdAt);
 
   return (
     <div className="flex justify-between pb-2 border-b-black border-b-2">

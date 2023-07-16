@@ -1,18 +1,34 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
+import { toast } from 'react-toastify';
 
+import { useGetAllCategoriesQuery } from '@/api/category.api';
+import { useCreateExpenseMutation } from '@/api/expense.api';
 import withAuth from '@/components/hocs/WithAuth';
 import Button from '@/components/shared/Button';
 import Input from '@/components/shared/Input';
 import Select from '@/components/shared/Select';
+import { ISelectOption } from '@/types/common';
 
 const AddExpense: React.FC = () => {
+  const [createExpense] = useCreateExpenseMutation();
+  const { data: categories } = useGetAllCategoriesQuery();
+
+  const categoriesOptions = useMemo(() => {
+    return categories
+      ? categories.map((category) => ({
+          value: category.id,
+          label: category.name,
+        }))
+      : [];
+  }, [categories]);
+
   const router = useRouter();
 
   const [amount, setAmount] = useState(0);
-  const [category, setCategory] = useState('food');
+  const [categoryOption, setCategoryOption] = useState<ISelectOption | null>(null);
   const [name, setName] = useState('');
   const [comment, setComment] = useState('');
 
@@ -20,8 +36,8 @@ const AddExpense: React.FC = () => {
     setAmount(Number(event.target.value));
   };
 
-  const handleCategoryChange = (newCategory: string): void => {
-    setCategory(newCategory);
+  const handleCategoryChange = (newCategoryOption: ISelectOption): void => {
+    setCategoryOption(newCategoryOption);
   };
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -44,15 +60,22 @@ const AddExpense: React.FC = () => {
     setComment('');
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
 
-    // eslint-disable-next-line no-console
-    console.log('submit');
+    try {
+      await createExpense({ amount, categoryId: (categoryOption?.value as number) || 1, name, comment });
 
-    handleAmountClear();
-    handleNameClear();
-    handleCommentClear();
+      router.push('/expenses');
+
+      handleAmountClear();
+      handleNameClear();
+      handleCommentClear();
+
+      toast('Expense created successfully');
+    } catch (error) {
+      toast('Something went wrong');
+    }
   };
 
   const handleBack = useCallback(() => {
@@ -74,7 +97,7 @@ const AddExpense: React.FC = () => {
       </div>
 
       <div className="mb-5">
-        <Select options={['food', 'clothes']} value={category} onChange={handleCategoryChange} />
+        <Select options={categoriesOptions} selectedOption={categoryOption} onChange={handleCategoryChange} />
       </div>
 
       <div className="mb-5">
