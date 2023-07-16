@@ -124,7 +124,7 @@ const AddExpense: React.FC = () => {
         <Button type="submit">add</Button>
       </div>
 
-      <Button onClick={handleBack} isOutlined>
+      <Button type="button" onClick={handleBack} isOutlined>
         back
       </Button>
     </form>

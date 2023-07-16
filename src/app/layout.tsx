@@ -29,7 +29,7 @@ const RootLayout: React.FC<PropsWithChildren> = ({ children }) => (
 
         <PopupManager />
 
-        <ToastContainer hideProgressBar theme="light" autoClose={false} />
+        <ToastContainer hideProgressBar theme="light" />
       </AppProvider>
     </body>
   </html>
