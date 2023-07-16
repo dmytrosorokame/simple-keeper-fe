@@ -9,8 +9,10 @@ interface ICreateCategoryDto {
 
 export const categoryApi = createApi({
   reducerPath: 'categoryApi',
+
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_API_PATH,
+
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as TRootState).auth.accessToken;
 
@@ -21,7 +23,9 @@ export const categoryApi = createApi({
       return headers;
     },
   }),
+
   tagTypes: [ApiTags.CATEGORY],
+
   endpoints: (builder) => ({
     createCategory: builder.mutation<ICategory, ICreateCategoryDto>({
       query: (dto) => ({
