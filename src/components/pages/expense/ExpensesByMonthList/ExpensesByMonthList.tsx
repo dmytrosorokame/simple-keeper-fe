@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useMemo } from 'react';
 
 import ExpenseList from '@/components/pages/expense/ExpenseList';
@@ -11,15 +12,17 @@ interface IExpensesByMonthListProps {
 const ExpensesByMonthList: React.FC<IExpensesByMonthListProps> = ({ expenses }) => {
   const groupedByDateExpenses = useMemo(() => groupExpensesByMonth(expenses), [expenses]);
 
-  const months = Object.keys(groupedByDateExpenses);
+  const dates = Object.keys(groupedByDateExpenses);
 
   return (
     <ul>
-      {months.map((month) => (
-        <div className="mt-2" key={month}>
-          <p className="mb-5 text-2xl">{month}</p>
+      {dates.map((date) => (
+        <div className="mt-2" key={date}>
+          <Link href={`/expenses-analytics?date=${date}`} className="mb-5 text-2xl underline">
+            {date}
+          </Link>
 
-          <ExpenseList expenses={groupedByDateExpenses[month]} />
+          <ExpenseList expenses={groupedByDateExpenses[date]} />
         </div>
       ))}
     </ul>
