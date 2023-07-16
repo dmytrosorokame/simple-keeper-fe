@@ -1,36 +1,15 @@
 'use client';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react';
 
+import { useGetAllCategoriesQuery } from '@/api/category.api';
 import withAuth from '@/components/hocs/WithAuth';
 import CategoryList from '@/components/pages/category/CategoryList';
 import Button from '@/components/shared/Button';
-import { ICategory } from '@/types/categories';
-
-const CATEGORIES: ICategory[] = [
-  {
-    id: 1,
-    name: 'Food',
-  },
-  {
-    id: 2,
-    name: 'Transport',
-  },
-  {
-    id: 3,
-    name: 'Entertainment',
-  },
-  {
-    id: 4,
-    name: 'Health',
-  },
-  {
-    id: 5,
-    name: 'Other',
-  },
-];
 
 const Categories: React.FC = () => {
+  const { data: categories } = useGetAllCategoriesQuery();
   const router = useRouter();
 
   const handleBack = useCallback(() => {
@@ -40,7 +19,13 @@ const Categories: React.FC = () => {
   return (
     <>
       <div className="mb-10">
-        <CategoryList categories={CATEGORIES} />
+        {categories ? (
+          <CategoryList categories={categories} />
+        ) : (
+          <p>
+            No categories, <Link href="/add-category">create</Link> one
+          </p>
+        )}
       </div>
 
       <Button onClick={handleBack} isOutlined>

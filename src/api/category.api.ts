@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+import { TRootState } from '@/store/store';
 import { ICategory } from '@/types/categories';
 
 interface ICreateCategoryDto {
@@ -10,6 +11,15 @@ export const categoryApi = createApi({
   reducerPath: 'categoryApi',
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_API_PATH,
+    prepareHeaders: (headers, { getState }) => {
+      const token = (getState() as TRootState).auth.accessToken;
+
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`);
+      }
+
+      return headers;
+    },
   }),
   endpoints: (builder) => ({
     createCategory: builder.mutation<ICategory, ICreateCategoryDto>({
@@ -32,3 +42,5 @@ export const categoryApi = createApi({
     }),
   }),
 });
+
+export const { useCreateCategoryMutation, useGetAllCategoriesQuery, useDeleteCategoryMutation } = categoryApi;

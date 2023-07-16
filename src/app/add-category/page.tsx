@@ -2,13 +2,17 @@
 
 import { useRouter } from 'next/navigation';
 import React, { useCallback, useState } from 'react';
+import { toast } from 'react-toastify';
 
+import { useCreateCategoryMutation } from '@/api/category.api';
 import withAuth from '@/components/hocs/WithAuth';
 import Button from '@/components/shared/Button';
 import Input from '@/components/shared/Input';
 
 const AddCategory: React.FC = () => {
   const router = useRouter();
+
+  const [create] = useCreateCategoryMutation();
 
   const [name, setName] = useState('');
 
@@ -20,13 +24,23 @@ const AddCategory: React.FC = () => {
     setName('');
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
 
-    // eslint-disable-next-line no-console
-    console.log('submit');
+    if (!name) {
+      return;
+    }
 
-    handleNameClear();
+    try {
+      await create({ name });
+
+      router.push('/categories');
+      handleNameClear();
+
+      toast('Category created successfully');
+    } catch (error) {
+      toast(error.message || 'Something went wrong');
+    }
   };
 
   const handleBack = useCallback(() => {
