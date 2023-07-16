@@ -12,7 +12,7 @@ import Input from '@/components/shared/Input';
 const AddCategory: React.FC = () => {
   const router = useRouter();
 
-  const [create] = useCreateCategoryMutation();
+  const [createCategory] = useCreateCategoryMutation();
 
   const [name, setName] = useState('');
 
@@ -32,7 +32,7 @@ const AddCategory: React.FC = () => {
     }
 
     try {
-      await create({ name });
+      await createCategory({ name });
 
       router.push('/categories');
       handleNameClear();

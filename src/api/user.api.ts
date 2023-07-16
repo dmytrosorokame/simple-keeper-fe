@@ -40,7 +40,9 @@ export const authorizeUser = async (): Promise<IUser & IAuthResponse> => {
 
     return { ...userData, accessToken, refreshToken };
   } catch (error) {
-    if (axios.isAxiosError(error) && error.response && error.response.status === 401) {
+    const isNotAuthorizeError = axios.isAxiosError(error) && error.response?.status === 401;
+
+    if (isNotAuthorizeError) {
       const refreshToken = Cookies.get('refreshToken');
 
       if (refreshToken) {

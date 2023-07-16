@@ -1,5 +1,4 @@
 'use client';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react';
 
@@ -9,7 +8,7 @@ import CategoryList from '@/components/pages/category/CategoryList';
 import Button from '@/components/shared/Button';
 
 const Categories: React.FC = () => {
-  const { data: categories } = useGetAllCategoriesQuery();
+  const { data: categories = [] } = useGetAllCategoriesQuery();
   const router = useRouter();
 
   const handleBack = useCallback(() => {
@@ -19,13 +18,7 @@ const Categories: React.FC = () => {
   return (
     <>
       <div className="mb-10">
-        {categories ? (
-          <CategoryList categories={categories} />
-        ) : (
-          <p>
-            No categories, <Link href="/add-category">create</Link> one
-          </p>
-        )}
+        <CategoryList categories={categories} />
       </div>
 
       <Button onClick={handleBack} isOutlined>

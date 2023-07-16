@@ -14,16 +14,16 @@ import { ISelectOption } from '@/types/common';
 
 const AddExpense: React.FC = () => {
   const [createExpense] = useCreateExpenseMutation();
-  const { data: categories } = useGetAllCategoriesQuery();
+  const { data: categories = [] } = useGetAllCategoriesQuery();
 
-  const categoriesOptions = useMemo(() => {
-    return categories
-      ? categories.map((category) => ({
-          value: category.id,
-          label: category.name,
-        }))
-      : [];
-  }, [categories]);
+  const categoriesOptions = useMemo(
+    () =>
+      categories.map((category) => ({
+        value: category.id,
+        label: category.name,
+      })),
+    [categories],
+  );
 
   const router = useRouter();
 

@@ -1,16 +1,15 @@
 'use client';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react';
 
 import { useGetAllExpensesQuery } from '@/api/expense.api';
 import withAuth from '@/components/hocs/WithAuth';
-import ExpenseList from '@/components/pages/expense/ExpenseList';
+import ExpensesByMonthList from '@/components/pages/expense/ExpensesByMonthList';
 import Button from '@/components/shared/Button';
 
 const Expenses: React.FC = () => {
-  const { data: expenses } = useGetAllExpensesQuery();
+  const { data: expenses = [] } = useGetAllExpensesQuery();
 
   const router = useRouter();
 
@@ -21,13 +20,7 @@ const Expenses: React.FC = () => {
   return (
     <>
       <div className="mb-10">
-        {expenses ? (
-          <ExpenseList expenses={expenses} />
-        ) : (
-          <p>
-            No expenses, <Link href="/add-expense">create</Link> one
-          </p>
-        )}
+        <ExpensesByMonthList expenses={expenses} />
       </div>
 
       <div className="mb-5">
