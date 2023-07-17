@@ -10,6 +10,7 @@ import withAuth from '@/components/hocs/WithAuth';
 import Button from '@/components/shared/Button';
 import Input from '@/components/shared/Input';
 import Select from '@/components/shared/Select';
+import { DEFAULT_CATEGORY_OPTION } from '@/constants/category';
 import { ISelectOption } from '@/types/common';
 
 const AddExpense: React.FC = () => {
@@ -17,18 +18,20 @@ const AddExpense: React.FC = () => {
   const { data: categories = [] } = useGetAllCategoriesQuery();
 
   const categoriesOptions = useMemo(
-    () =>
-      categories.map((category) => ({
+    () => [
+      ...categories.map((category) => ({
         value: category.id,
         label: category.name,
       })),
+      DEFAULT_CATEGORY_OPTION,
+    ],
     [categories],
   );
 
   const router = useRouter();
 
   const [amount, setAmount] = useState(0);
-  const [categoryOption, setCategoryOption] = useState<ISelectOption | null>(null);
+  const [categoryOption, setCategoryOption] = useState<ISelectOption>(DEFAULT_CATEGORY_OPTION);
   const [name, setName] = useState('');
   const [comment, setComment] = useState('');
 
@@ -64,7 +67,12 @@ const AddExpense: React.FC = () => {
     event.preventDefault();
 
     try {
-      await createExpense({ amount, categoryId: (categoryOption?.value as number) || 1, name, comment });
+      await createExpense({
+        amount,
+        categoryId: categoryOption?.value ? Number(categoryOption.value) : null,
+        name,
+        comment,
+      });
 
       router.back();
 

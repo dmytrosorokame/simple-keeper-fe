@@ -6,7 +6,7 @@ import { IExpense } from '@/types/expenses';
 
 interface ICreateExpenseDto {
   amount: number;
-  categoryId: number;
+  categoryId: number | null;
   name?: string;
   comment?: string;
 }

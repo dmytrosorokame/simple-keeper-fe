@@ -10,4 +10,6 @@ export interface IExpense {
   category: ICategory;
 }
 
+export type TExpensesByCategory = Record<string, IExpense[]>;
+
 export type TSpendByCategory = Record<string, number>;

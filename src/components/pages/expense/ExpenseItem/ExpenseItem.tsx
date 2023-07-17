@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { useGetAllCategoriesQuery } from '@/api/category.api';
+import { DEFAULT_CATEGORY } from '@/constants/category';
 import { IExpense } from '@/types/expenses';
 import { formatDate } from '@/utils/date';
 
@@ -14,7 +15,7 @@ const ExpenseItem: React.FC<IExpenseItemProps> = ({ expense }) => {
   const category = useMemo(() => {
     const category = categories?.find((category) => category.id === expense.categoryId);
 
-    return category ? category.name : '';
+    return category?.name ?? DEFAULT_CATEGORY;
   }, [categories, expense]);
 
   const formattedDate = formatDate(expense.createdAt);

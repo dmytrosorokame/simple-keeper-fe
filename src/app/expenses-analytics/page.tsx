@@ -8,9 +8,10 @@ import { useGetAllExpensesQuery } from '@/api/expense.api';
 import withAuth from '@/components/hocs/WithAuth';
 import ExpensesChart from '@/components/pages/expense/ExpensesChart';
 import Button from '@/components/shared/Button';
-import { calculateCategorySpend } from '@/utils/calculateCategorySpend';
 import { calculateTotalSpend } from '@/utils/calculateTotalSpend';
+import { groupExpensesByCategory } from '@/utils/groupExpensesByCategory';
 import { groupExpensesByMonth } from '@/utils/groupExpensesByMonth';
+import { sortExpensesBySpend } from '@/utils/sortExpensesBySpend';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -26,42 +27,51 @@ const ExpensesAnalytics: React.FC = () => {
 
   const expensesForCurrentDate = groupedByDateExpenses[expensesDate] ?? [];
 
-  const spendByCategory = useMemo(() => calculateCategorySpend(expensesForCurrentDate), [expensesForCurrentDate]);
+  const expensesByCategory = useMemo(() => groupExpensesByCategory(expensesForCurrentDate), [expensesForCurrentDate]);
 
-  const totalSpend = useMemo(() => calculateTotalSpend(expensesForCurrentDate), [spendByCategory]);
+  const totalSpend = useMemo(() => calculateTotalSpend(expensesForCurrentDate), [expensesForCurrentDate]);
+
+  const expensesByCategoriesSortedByTotalSpend = useMemo(
+    () =>
+      Object.entries(expensesByCategory).sort(([, firstExpenses], [, secondExpenses]) =>
+        sortExpensesBySpend(firstExpenses, secondExpenses),
+      ),
+    [expensesByCategory],
+  );
 
   const handleBack = useCallback(() => {
     router.back();
   }, [router]);
 
   return (
-    <div>
+    <div className="pb-5">
       <h1 className="text-center mt-5 text-3xl mb-5">Expenses for {expensesDate}</h1>
 
-      <div className="flex justify-center">
-        <div className="max-w-xs">
-          <ExpensesChart spendByCategory={spendByCategory} />
-        </div>
+      <div className="max-w-md m-auto">
+        <ExpensesChart expensesByCategory={expensesByCategory} />
       </div>
 
-      <p className="text-center mt-2">Total spend: {totalSpend}</p>
+      <p className="text-center mt-2 text-xl">
+        Total spend: <span className="font-semibold">{totalSpend}</span>
+      </p>
 
-      <div className="mb-5">
-        <h2 className="mt-5 text-lg mb-3">Spend for each category: </h2>
+      <div className="mt-10 mb-5">
+        <h2 className="text-xl">Spend for each category: </h2>
 
-        <ul>
-          {Object.entries(spendByCategory).map(([category, spend]) => (
+        <ul className="mt-5">
+          {expensesByCategoriesSortedByTotalSpend.map(([category, expenses]) => (
             <li key={category} className="flex justify-between border-b-2 border-black pb-2 mt-2">
-              <p>{category}</p>
-              <p>{spend}</p>
+              <p>
+                {category} ({expenses.length})
+              </p>
+
+              <p>{calculateTotalSpend(expenses)}</p>
             </li>
           ))}
         </ul>
       </div>
 
-      <Button onClick={handleBack} isOutlined>
-        back
-      </Button>
+      <Button onClick={handleBack}>back</Button>
     </div>
   );
 };

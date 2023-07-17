@@ -1,16 +1,19 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
-import { TSpendByCategory } from '@/types/expenses';
+import { TExpensesByCategory } from '@/types/expenses';
+import { calculateSpendByCategory } from '@/utils/calculateSpendByCategory';
 import { generateRandomColor } from '@/utils/generateRandomColor';
 
 interface IExpensesChartProps {
-  spendByCategory: TSpendByCategory;
+  expensesByCategory: TExpensesByCategory;
 }
 
-const ExpensesChart: React.FC<IExpensesChartProps> = ({ spendByCategory }) => {
-  const labels = Object.keys(spendByCategory);
+const ExpensesChart: React.FC<IExpensesChartProps> = ({ expensesByCategory }) => {
+  const labels = Object.keys(expensesByCategory);
   const backgroundColor = labels.map(() => generateRandomColor());
+
+  const spendByCategory = calculateSpendByCategory(expensesByCategory);
 
   const data = {
     labels,
