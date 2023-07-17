@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import React, { useMemo } from 'react';
 
 import { useGetAllCategoriesQuery } from '@/api/category.api';
@@ -10,6 +11,8 @@ interface IExpenseItemProps {
 }
 
 const ExpenseItem: React.FC<IExpenseItemProps> = ({ expense }) => {
+  const router = useRouter();
+
   const { data: categories } = useGetAllCategoriesQuery();
 
   const category = useMemo(() => {
@@ -20,14 +23,18 @@ const ExpenseItem: React.FC<IExpenseItemProps> = ({ expense }) => {
 
   const formattedDate = formatDate(expense.createdAt);
 
+  const handleOpenDetails = (): void => {
+    router.push(`/expense-details?expenseId=${expense.id}`);
+  };
+
   return (
-    <div className="flex justify-between pb-2 border-b-black border-b-2">
-      <p className="w-1/3">{expense.amount}</p>
+    <button className="flex w-full justify-between pb-2 border-b-black border-b-2" onClick={handleOpenDetails}>
+      <p className="w-1/3 text-left">{expense.amount}</p>
 
       <p className="w-1/3 text-center">{category}</p>
 
       <p className="w-1/3 text-right">{formattedDate}</p>
-    </div>
+    </button>
   );
 };
 
