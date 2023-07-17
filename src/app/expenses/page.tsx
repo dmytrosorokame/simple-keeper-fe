@@ -13,18 +13,22 @@ const Expenses: React.FC = () => {
 
   const router = useRouter();
 
+  const handleAddExpense = useCallback(() => {
+    router.push('/add-expense');
+  }, [router]);
+
   const handleBack = useCallback(() => {
-    router.push('/');
+    router.back();
   }, [router]);
 
   return (
     <>
       <div className="mb-10">
-        <ExpensesByMonthList expenses={expenses} />
+        {expenses.length ? <ExpensesByMonthList expenses={expenses} /> : <p className="text-center">No expenses!</p>}
       </div>
 
       <div className="mb-5">
-        <Button>show all</Button>
+        <Button onClick={handleAddExpense}>add</Button>
       </div>
 
       <Button onClick={handleBack} isOutlined>

@@ -34,7 +34,8 @@ const AddCategory: React.FC = () => {
     try {
       await createCategory({ name });
 
-      router.push('/categories');
+      router.back();
+
       handleNameClear();
 
       toast('Category created successfully');
@@ -44,7 +45,7 @@ const AddCategory: React.FC = () => {
   };
 
   const handleBack = useCallback(() => {
-    router.push('/');
+    router.back();
   }, [router]);
 
   return (

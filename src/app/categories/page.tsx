@@ -11,14 +11,22 @@ const Categories: React.FC = () => {
   const { data: categories = [] } = useGetAllCategoriesQuery();
   const router = useRouter();
 
+  const handleAddCategory = useCallback(() => {
+    router.push('/add-category');
+  }, [router]);
+
   const handleBack = useCallback(() => {
-    router.push('/');
+    router.back();
   }, [router]);
 
   return (
     <>
       <div className="mb-10">
-        <CategoryList categories={categories} />
+        {categories.length ? <CategoryList categories={categories} /> : <p className="text-center">No categories!</p>}
+      </div>
+
+      <div className="mb-5">
+        <Button onClick={handleAddCategory}>add</Button>
       </div>
 
       <Button onClick={handleBack} isOutlined>

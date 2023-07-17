@@ -9,3 +9,5 @@ export interface IExpense {
   categoryId: number;
   category: ICategory;
 }
+
+export type TSpendByCategory = Record<string, number>;

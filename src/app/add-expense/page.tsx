@@ -66,7 +66,7 @@ const AddExpense: React.FC = () => {
     try {
       await createExpense({ amount, categoryId: (categoryOption?.value as number) || 1, name, comment });
 
-      router.push('/expenses');
+      router.back();
 
       handleAmountClear();
       handleNameClear();
@@ -79,7 +79,7 @@ const AddExpense: React.FC = () => {
   };
 
   const handleBack = useCallback(() => {
-    router.push('/');
+    router.back();
   }, [router]);
 
   return (

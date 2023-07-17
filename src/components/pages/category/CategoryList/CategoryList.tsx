@@ -8,15 +8,13 @@ interface ICategoriesListProps {
 }
 
 const CategoryList: React.FC<ICategoriesListProps> = ({ categories }) => (
-  <>
-    <ul>
-      {categories.map((category) => (
-        <div className="mt-2" key={category.id}>
-          <CategoryItem category={category} />
-        </div>
-      ))}
-    </ul>
-  </>
+  <ul>
+    {categories.map((category) => (
+      <div className="mt-2" key={category.id}>
+        <CategoryItem category={category} />
+      </div>
+    ))}
+  </ul>
 );
 
 export default CategoryList;
