@@ -70,8 +70,8 @@ const AddExpense: React.FC = () => {
       await createExpense({
         amount,
         categoryId: categoryOption?.value ? Number(categoryOption.value) : null,
-        name,
-        comment,
+        name: name || null,
+        comment: comment || null,
       });
 
       router.back();

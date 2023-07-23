@@ -7,8 +7,8 @@ import { IExpense } from '@/types/expenses';
 interface ICreateExpenseDto {
   amount: number;
   categoryId: number | null;
-  name?: string;
-  comment?: string;
+  name: string | null;
+  comment: string | null;
 }
 
 export const expenseApi = createApi({
