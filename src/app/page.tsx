@@ -1,11 +1,14 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 import WithAuth from '@/components/hocs/WithAuth/WithAuth';
 import Button from '@/components/shared/Button';
 import { logout } from '@/store/auth/auth.slice';
+import { hidePopup, showPopup } from '@/store/popup/popup.slice';
 import { useAppDispatch } from '@/store/store';
+import { Popup } from '@/types/popup';
 
 const Home: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -20,8 +23,23 @@ const Home: React.FC = () => {
   };
 
   const handleLogout = (): void => {
-    dispatch(logout());
-    router.push('/login');
+    dispatch(
+      showPopup({
+        popup: Popup.SUBMIT,
+        data: {
+          onConfirm: () => {
+            dispatch(logout());
+            router.push('/login');
+            dispatch(hidePopup());
+
+            toast('Logout successfully!');
+          },
+          onCancel: () => {
+            dispatch(hidePopup());
+          },
+        },
+      }),
+    );
   };
 
   return (
