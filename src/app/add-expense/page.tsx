@@ -1,7 +1,8 @@
 'use client';
 
+import { Formik } from 'formik';
 import { useRouter } from 'next/navigation';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { toast } from 'react-toastify';
 
 import { useGetAllCategoriesQuery } from '@/api/category.api';
@@ -13,7 +14,16 @@ import Select from '@/components/shared/Select';
 import { DEFAULT_CATEGORY_OPTION } from '@/constants/category';
 import { ISelectOption } from '@/types/common';
 
+interface IAddExpenseFormValues {
+  amount: number;
+  categoryOption: ISelectOption;
+  name: string;
+  comment: string;
+}
+
 const AddExpense: React.FC = () => {
+  const router = useRouter();
+
   const [createExpense] = useCreateExpenseMutation();
   const { data: categories = [] } = useGetAllCategoriesQuery();
 
@@ -28,44 +38,14 @@ const AddExpense: React.FC = () => {
     [categories],
   );
 
-  const router = useRouter();
-
-  const [amount, setAmount] = useState(0);
-  const [categoryOption, setCategoryOption] = useState<ISelectOption>(DEFAULT_CATEGORY_OPTION);
-  const [name, setName] = useState('');
-  const [comment, setComment] = useState('');
-
-  const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setAmount(Number(event.target.value));
+  const initialValues: IAddExpenseFormValues = {
+    amount: 0,
+    categoryOption: DEFAULT_CATEGORY_OPTION,
+    name: '',
+    comment: '',
   };
 
-  const handleCategoryChange = (newCategoryOption: ISelectOption): void => {
-    setCategoryOption(newCategoryOption);
-  };
-
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setName(event.target.value);
-  };
-
-  const handleCommentChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setComment(event.target.value);
-  };
-
-  const handleAmountClear = (): void => {
-    setAmount(0);
-  };
-
-  const handleNameClear = (): void => {
-    setName('');
-  };
-
-  const handleCommentClear = (): void => {
-    setComment('');
-  };
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    event.preventDefault();
-
+  const handleSubmit = async ({ amount, categoryOption, name, comment }: IAddExpenseFormValues): Promise<void> => {
     try {
       await createExpense({
         amount,
@@ -74,13 +54,9 @@ const AddExpense: React.FC = () => {
         comment: comment || null,
       });
 
-      router.back();
-
-      handleAmountClear();
-      handleNameClear();
-      handleCommentClear();
-
       toast('Expense created successfully');
+
+      router.back();
     } catch (error) {
       toast('Something went wrong');
     }
@@ -91,51 +67,61 @@ const AddExpense: React.FC = () => {
   }, [router]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="mb-5">
-        <Input
-          placeholder="amount"
-          value={amount}
-          onChange={handleAmountChange}
-          isCrossVisible={!!amount}
-          onCrossClick={handleAmountClear}
-          type="number"
-          min={0}
-        />
-      </div>
+    <Formik onSubmit={handleSubmit} initialValues={initialValues}>
+      {({ values, handleChange, setFieldValue, handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <div className="mb-5">
+            <Input
+              placeholder="amount"
+              value={values.amount}
+              onChange={handleChange('amount')}
+              isCrossVisible={!!values.amount}
+              onCrossClick={() => setFieldValue('amount', 0)}
+              type="number"
+              min={0}
+            />
+          </div>
 
-      <div className="mb-5">
-        <Select options={categoriesOptions} selectedOption={categoryOption} onChange={handleCategoryChange} />
-      </div>
+          <div className="mb-5">
+            <Select
+              options={categoriesOptions}
+              selectedOption={values.categoryOption}
+              onChange={(newCategoryOption) => {
+                setFieldValue('categoryOption', newCategoryOption);
+              }}
+            />
+          </div>
 
-      <div className="mb-5">
-        <Input
-          placeholder="name?"
-          value={name}
-          onChange={handleNameChange}
-          isCrossVisible={!!name}
-          onCrossClick={handleNameClear}
-        />
-      </div>
+          <div className="mb-5">
+            <Input
+              placeholder="name?"
+              value={values.name}
+              onChange={handleChange('name')}
+              isCrossVisible={!!values.name}
+              onCrossClick={() => setFieldValue('name', '')}
+            />
+          </div>
 
-      <div className="mb-5">
-        <Input
-          placeholder="comment?"
-          value={comment}
-          onChange={handleCommentChange}
-          isCrossVisible={!!comment}
-          onCrossClick={handleCommentClear}
-        />
-      </div>
+          <div className="mb-5">
+            <Input
+              placeholder="comment?"
+              value={values.comment}
+              onChange={handleChange('comment')}
+              isCrossVisible={!!values.comment}
+              onCrossClick={() => setFieldValue('comment', '')}
+            />
+          </div>
 
-      <div className="mb-5">
-        <Button type="submit">add</Button>
-      </div>
+          <div className="mb-5">
+            <Button type="submit">add</Button>
+          </div>
 
-      <Button type="button" onClick={handleBack} isOutlined>
-        back
-      </Button>
-    </form>
+          <Button type="button" onClick={handleBack} isOutlined>
+            back
+          </Button>
+        </form>
+      )}
+    </Formik>
   );
 };
 
