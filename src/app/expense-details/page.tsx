@@ -76,12 +76,6 @@ const ExpenseDetailsPage: React.FC = () => {
         </Button>
       </div>
 
-      <div className="mb-3">
-        <Button onClick={handleBack} isOutlined>
-          update
-        </Button>
-      </div>
-
       <Button onClick={handleBack}>back</Button>
     </div>
   );
