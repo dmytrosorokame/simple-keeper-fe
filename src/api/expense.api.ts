@@ -50,7 +50,7 @@ export const expenseApi = createApi({
       providesTags: [ApiTags.EXPENSE],
     }),
 
-    deleteExpense: builder.mutation<IExpense, void>({
+    deleteExpense: builder.mutation<IExpense, number>({
       query: (id) => ({
         url: `/expenses/${id}`,
         method: 'DELETE',
@@ -60,4 +60,5 @@ export const expenseApi = createApi({
   }),
 });
 
-export const { useCreateExpenseMutation, useGetAllExpensesQuery, useGetExpenseByIdQuery } = expenseApi;
+export const { useCreateExpenseMutation, useGetAllExpensesQuery, useGetExpenseByIdQuery, useDeleteExpenseMutation } =
+  expenseApi;

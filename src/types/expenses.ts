@@ -1,7 +1,7 @@
 import { ICategory } from './categories';
 
 export interface IExpense {
-  id: string;
+  id: number;
   amount: number;
   name?: string;
   comment?: string;
