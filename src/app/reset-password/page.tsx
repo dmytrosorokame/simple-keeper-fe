@@ -6,6 +6,7 @@ import React from 'react';
 
 import Button from '@/components/shared/Button';
 import Input from '@/components/shared/Input';
+import { resetPasswordValidationSchema } from '@/constants/validation/reset-password.schema';
 
 interface IResetPasswordFormValues {
   email: string;
@@ -22,8 +23,8 @@ const ResetPassword: React.FC = () => {
   };
 
   return (
-    <Formik onSubmit={handleSubmit} initialValues={initialValues}>
-      {({ values, handleChange, setFieldValue, handleSubmit }) => (
+    <Formik onSubmit={handleSubmit} initialValues={initialValues} validationSchema={resetPasswordValidationSchema}>
+      {({ values, handleChange, setFieldValue, handleSubmit, errors, touched }) => (
         <form onSubmit={handleSubmit}>
           <div className="mb-5">
             <Input
@@ -32,6 +33,7 @@ const ResetPassword: React.FC = () => {
               onChange={handleChange('values')}
               isCrossVisible={!!values.email}
               onCrossClick={() => setFieldValue('email', '')}
+              error={errors.email && touched.email ? errors.email : null}
             />
           </div>
 

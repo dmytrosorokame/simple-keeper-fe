@@ -3,6 +3,7 @@ import React from 'react';
 
 import Button from '@/components/shared/Button';
 import Input from '@/components/shared/Input';
+import { authValidationSchema } from '@/constants/validation/auth.schema';
 import { IAuthDto } from '@/types/auth';
 
 interface IAuthFormValues {
@@ -31,8 +32,8 @@ const AuthForm: React.FC<IAuthFormProps> = ({ onSubmit, buttonLabel = 'signup' }
   };
 
   return (
-    <Formik onSubmit={handleSubmit} initialValues={initialValues}>
-      {({ values, handleChange, handleSubmit, setFieldValue }) => (
+    <Formik onSubmit={handleSubmit} initialValues={initialValues} validationSchema={authValidationSchema}>
+      {({ values, handleChange, handleSubmit, setFieldValue, errors, touched }) => (
         <form onSubmit={handleSubmit}>
           <div className="mb-5">
             <Input
@@ -41,6 +42,7 @@ const AuthForm: React.FC<IAuthFormProps> = ({ onSubmit, buttonLabel = 'signup' }
               onChange={handleChange('email')}
               isCrossVisible={!!values.email}
               onCrossClick={() => setFieldValue('email', '')}
+              error={errors.email && touched.email ? errors.email : null}
             />
           </div>
 
@@ -52,6 +54,7 @@ const AuthForm: React.FC<IAuthFormProps> = ({ onSubmit, buttonLabel = 'signup' }
               isCrossVisible={!!values.password}
               onCrossClick={() => setFieldValue('password', '')}
               type="password"
+              error={errors.password && touched.password ? errors.password : null}
             />
           </div>
 

@@ -12,6 +12,7 @@ import Button from '@/components/shared/Button';
 import Input from '@/components/shared/Input';
 import Select from '@/components/shared/Select';
 import { DEFAULT_CATEGORY_OPTION } from '@/constants/category';
+import { addExpenseValidationSchema } from '@/constants/validation/add-expense.schema';
 import { ISelectOption } from '@/types/common';
 
 interface IAddExpenseFormValues {
@@ -67,8 +68,8 @@ const AddExpense: React.FC = () => {
   }, [router]);
 
   return (
-    <Formik onSubmit={handleSubmit} initialValues={initialValues}>
-      {({ values, handleChange, setFieldValue, handleSubmit }) => (
+    <Formik onSubmit={handleSubmit} initialValues={initialValues} validationSchema={addExpenseValidationSchema}>
+      {({ values, handleChange, setFieldValue, handleSubmit, errors, touched }) => (
         <form onSubmit={handleSubmit}>
           <div className="mb-5">
             <Input
@@ -77,6 +78,7 @@ const AddExpense: React.FC = () => {
               onChange={handleChange('amount')}
               isCrossVisible={!!values.amount}
               onCrossClick={() => setFieldValue('amount', 0)}
+              error={errors.amount && touched.amount ? errors.amount : null}
               type="number"
               min={0}
             />

@@ -9,6 +9,7 @@ import { useCreateCategoryMutation } from '@/api/category.api';
 import withAuth from '@/components/hocs/WithAuth';
 import Button from '@/components/shared/Button';
 import Input from '@/components/shared/Input';
+import { addCategoryValidationSchema } from '@/constants/validation/add-category.schema';
 
 interface IAddCategoryFormValues {
   name: string;
@@ -40,8 +41,8 @@ const AddCategory: React.FC = () => {
   }, [router]);
 
   return (
-    <Formik onSubmit={handleSubmit} initialValues={initialValues}>
-      {({ values, handleChange, setFieldValue, handleSubmit }) => (
+    <Formik onSubmit={handleSubmit} initialValues={initialValues} validationSchema={addCategoryValidationSchema}>
+      {({ values, handleChange, setFieldValue, handleSubmit, errors, touched }) => (
         <form onSubmit={handleSubmit}>
           <div className="mb-5">
             <Input
@@ -50,6 +51,7 @@ const AddCategory: React.FC = () => {
               onChange={handleChange('name')}
               isCrossVisible={!!values.name}
               onCrossClick={() => setFieldValue('name', '')}
+              error={errors.name && touched.name ? errors.name : null}
             />
           </div>
 
