@@ -40,7 +40,7 @@ const ExpenseDetailsPage: React.FC = () => {
             try {
               await deleteExpense(expense.id);
 
-              toast('Category deleted successfully!');
+              toast('Expense deleted successfully!');
 
               router.back();
             } catch (error) {
