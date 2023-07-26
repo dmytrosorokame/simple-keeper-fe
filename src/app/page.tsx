@@ -52,9 +52,7 @@ const Home: React.FC = () => {
         <Button onClick={handleNavigateToCategories}>categories</Button>
       </div>
 
-      <Button isOutlined onClick={handleLogout}>
-        logout
-      </Button>
+      <Button onClick={handleLogout}>logout</Button>
     </>
   );
 };

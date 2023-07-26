@@ -28,7 +28,7 @@ const WithAuth = (WrappedComponent: ComponentType): React.FC => {
       if (!isAuthenticated) {
         authorize();
       }
-    }, []);
+    }, [dispatch]);
 
     if (isAuthenticated) {
       return <WrappedComponent {...props} />;

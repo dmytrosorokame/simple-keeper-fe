@@ -3,34 +3,42 @@ import cn from 'classnames';
 import { Inter } from 'next/font/google';
 import 'react-toastify/dist/ReactToastify.css';
 import './globals.css';
+import { usePathname } from 'next/navigation';
 import { PropsWithChildren } from 'react';
 import { ToastContainer } from 'react-toastify';
 
 import AppProvider from '@/components/generic/AppProvider';
 import PopupManager from '@/components/generic/PopupManager';
 import Heading from '@/components/shared/Heading';
+import { Pages } from '@/constants/pages';
+import { PAGES_WITHOUT_HEADING } from '@/constants/pagesWithoutHeading';
 
 const inter = Inter({ subsets: ['latin'] });
 
-const RootLayout: React.FC<PropsWithChildren> = ({ children }) => (
-  <html lang="en">
-    <head>
-      <link rel="icon" href="/favicon.ico" sizes="any" />
-    </head>
-    <body className={cn(inter.className, 'p-6 h-screen flex flex-col justify-center')}>
-      <AppProvider>
-        <div className="max-w-screen-sm m-auto w-full">
-          <Heading />
+const RootLayout: React.FC<PropsWithChildren> = ({ children }) => {
+  const pathname = usePathname();
 
-          {children}
-        </div>
+  const isShowHeading = !PAGES_WITHOUT_HEADING.includes(pathname as Pages);
 
-        <PopupManager />
+  return (
+    <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
+      <body className={cn(inter.className, 'p-6 h-screen flex flex-col justify-center')}>
+        <AppProvider>
+          <div className="max-w-screen-sm m-auto w-full">
+            {isShowHeading && <Heading />}
+            {children}
+          </div>
 
-        <ToastContainer hideProgressBar theme="light" />
-      </AppProvider>
-    </body>
-  </html>
-);
+          <PopupManager />
+
+          <ToastContainer hideProgressBar theme="light" />
+        </AppProvider>
+      </body>
+    </html>
+  );
+};
 
 export default RootLayout;
