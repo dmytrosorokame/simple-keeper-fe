@@ -10,6 +10,7 @@ import AuthForm from '@/components/generic/AuthForm';
 import { ISubmitAuthFormParams } from '@/components/generic/AuthForm/AuthForm';
 import { setCredentials } from '@/store/auth/auth.slice';
 import { useAppDispatch } from '@/store/store';
+import { IError } from '@/types/error';
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -20,7 +21,13 @@ const Login: React.FC = () => {
   const handleSubmit = async ({ values, reset }: ISubmitAuthFormParams): Promise<void> => {
     const result = await login(values);
 
-    if ('error' in result) return;
+    if ('error' in result) {
+      const error = result.error as IError;
+
+      toast(error.data.message);
+
+      return;
+    }
 
     dispatch(setCredentials(result.data));
 
@@ -38,13 +45,6 @@ const Login: React.FC = () => {
           Don't have an account? –{' '}
           <Link href="/signup" className="underline">
             signup
-          </Link>
-        </p>
-
-        <p>
-          Forgot your password? –{' '}
-          <Link href="/reset-password" className="underline">
-            reset password
           </Link>
         </p>
       </div>

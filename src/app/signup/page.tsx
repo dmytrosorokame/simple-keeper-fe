@@ -10,6 +10,7 @@ import AuthForm from '@/components/generic/AuthForm';
 import { ISubmitAuthFormParams } from '@/components/generic/AuthForm/AuthForm';
 import { setCredentials } from '@/store/auth/auth.slice';
 import { useAppDispatch } from '@/store/store';
+import { IError } from '@/types/error';
 
 const SignUp: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -20,7 +21,13 @@ const SignUp: React.FC = () => {
   const handleSubmit = async ({ values, reset }: ISubmitAuthFormParams): Promise<void> => {
     const result = await signUp(values);
 
-    if ('error' in result) return;
+    if ('error' in result) {
+      const error = result.error as IError;
+
+      toast(error.data.message);
+
+      return;
+    }
 
     dispatch(setCredentials(result.data));
 
