@@ -2,7 +2,7 @@
 
 import { Formik } from 'formik';
 import { useRouter } from 'next/navigation';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { useGetAllCategoriesQuery } from '@/api/category.api';
@@ -10,6 +10,7 @@ import { useCreateExpenseMutation } from '@/api/expense.api';
 import withAuth from '@/components/hocs/WithAuth';
 import Button from '@/components/shared/Button';
 import Input from '@/components/shared/Input';
+import LoadingButton from '@/components/shared/LoadingButton';
 import Select from '@/components/shared/Select';
 import { DEFAULT_CATEGORY_OPTION } from '@/constants/category';
 import { addExpenseValidationSchema } from '@/constants/validation/add-expense.schema';
@@ -27,6 +28,8 @@ const AddExpense: React.FC = () => {
 
   const [createExpense] = useCreateExpenseMutation();
   const { data: categories = [] } = useGetAllCategoriesQuery();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const categoriesOptions = useMemo(
     () => [
@@ -47,6 +50,8 @@ const AddExpense: React.FC = () => {
   };
 
   const handleSubmit = async ({ amount, categoryOption, name, comment }: IAddExpenseFormValues): Promise<void> => {
+    setIsLoading(true);
+
     try {
       await createExpense({
         amount,
@@ -61,6 +66,8 @@ const AddExpense: React.FC = () => {
     } catch (error) {
       toast('Something went wrong');
     }
+
+    setIsLoading(false);
   };
 
   const handleBack = useCallback(() => {
@@ -115,7 +122,9 @@ const AddExpense: React.FC = () => {
           </div>
 
           <div className="mb-5">
-            <Button type="submit">add</Button>
+            <LoadingButton type="submit" isLoading={isLoading}>
+              add
+            </LoadingButton>
           </div>
 
           <Button type="button" onClick={handleBack} isOutlined>

@@ -15,17 +15,23 @@ const ExpensesByMonthList: React.FC<IExpensesByMonthListProps> = ({ expenses }) 
   const dates = Object.keys(groupedByDateExpenses);
 
   return (
-    <ul>
-      {dates.map((date) => (
-        <div className="mt-2" key={date}>
-          <Link href={`/expenses-analytics?date=${date}`} className="mb-5 text-2xl underline">
-            {date}
-          </Link>
+    <>
+      {dates.length ? (
+        <ul>
+          {dates.map((date) => (
+            <li className="mt-2" key={date}>
+              <Link href={`/expenses-analytics?date=${date}`} className="mb-5 text-2xl underline">
+                {date}
+              </Link>
 
-          <ExpenseList expenses={groupedByDateExpenses[date]} />
-        </div>
-      ))}
-    </ul>
+              <ExpenseList expenses={groupedByDateExpenses[date]} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="text-center">No expenses!</p>
+      )}
+    </>
   );
 };
 

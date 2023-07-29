@@ -7,11 +7,14 @@ import { useGetAllExpensesQuery } from '@/api/expense.api';
 import withAuth from '@/components/hocs/WithAuth';
 import ExpensesByMonthList from '@/components/pages/expense/ExpensesByMonthList';
 import Button from '@/components/shared/Button';
+import Loader from '@/components/shared/Loader';
 
 const Expenses: React.FC = () => {
-  const { data: expenses = [] } = useGetAllExpensesQuery();
-
   const router = useRouter();
+
+  const { data: expenses = [], isLoading, isFetching } = useGetAllExpensesQuery();
+
+  const isShowLoader = isFetching || isLoading;
 
   const handleAddExpense = useCallback(() => {
     router.push('/add-expense');
@@ -24,7 +27,13 @@ const Expenses: React.FC = () => {
   return (
     <>
       <div className="mb-10">
-        {expenses.length ? <ExpensesByMonthList expenses={expenses} /> : <p className="text-center">No expenses!</p>}
+        {isShowLoader ? (
+          <div className="w-10 h-10 m-auto">
+            <Loader />
+          </div>
+        ) : (
+          <ExpensesByMonthList expenses={expenses} />
+        )}
       </div>
 
       <div className="mb-5">

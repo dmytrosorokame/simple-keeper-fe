@@ -2,6 +2,7 @@ import { useRouter } from 'next/navigation';
 import React, { useMemo } from 'react';
 
 import { useGetAllCategoriesQuery } from '@/api/category.api';
+import Loader from '@/components/shared/Loader';
 import { DEFAULT_CATEGORY } from '@/constants/category';
 import { IExpense } from '@/types/expenses';
 import { formatDate } from '@/utils/date';
@@ -13,7 +14,9 @@ interface IExpenseItemProps {
 const ExpenseItem: React.FC<IExpenseItemProps> = ({ expense }) => {
   const router = useRouter();
 
-  const { data: categories } = useGetAllCategoriesQuery();
+  const { data: categories, isFetching, isLoading } = useGetAllCategoriesQuery();
+
+  const isShowLoader = isFetching || isLoading;
 
   const category = useMemo(() => {
     const category = categories?.find((category) => category.id === expense.categoryId);
@@ -31,7 +34,15 @@ const ExpenseItem: React.FC<IExpenseItemProps> = ({ expense }) => {
     <button className="flex w-full justify-between pb-2 border-b-black border-b-2" onClick={handleOpenDetails}>
       <p className="w-1/3 text-left">{expense.amount}</p>
 
-      <p className="w-1/3 text-center">{category}</p>
+      <p className="w-1/3 text-center">
+        {isShowLoader ? (
+          <div className="w-5 h-5 m-auto">
+            <Loader />
+          </div>
+        ) : (
+          category
+        )}
+      </p>
 
       <p className="w-1/3 text-right">{formattedDate}</p>
     </button>
