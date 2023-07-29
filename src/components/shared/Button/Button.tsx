@@ -1,15 +1,11 @@
 'use client';
 
 import cn from 'classnames';
-import React, { ButtonHTMLAttributes, DetailedHTMLProps, PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 
-interface IButtonProps {
-  isOutlined?: boolean;
-}
+import { IButtonProps } from '@/types/common';
 
-type TButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> & IButtonProps;
-
-const Button: React.FC<PropsWithChildren<TButtonProps>> = ({ children, disabled, isOutlined, ...rest }) => (
+const Button: React.FC<PropsWithChildren<IButtonProps>> = ({ children, disabled, isOutlined, ...rest }) => (
   <button
     disabled={disabled}
     className={cn(

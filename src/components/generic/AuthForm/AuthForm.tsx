@@ -1,8 +1,8 @@
 import { Formik, FormikHelpers } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
 
-import Button from '@/components/shared/Button';
 import Input from '@/components/shared/Input';
+import LoadingButton from '@/components/shared/LoadingButton';
 import { authValidationSchema } from '@/constants/validation/auth.schema';
 import { IAuthDto } from '@/types/auth';
 
@@ -17,18 +17,27 @@ export interface ISubmitAuthFormParams {
 }
 
 interface IAuthFormProps {
-  onSubmit: (data: ISubmitAuthFormParams) => void;
+  onSubmit: (data: ISubmitAuthFormParams) => Promise<void>;
   buttonLabel?: string;
 }
 
 const AuthForm: React.FC<IAuthFormProps> = ({ onSubmit, buttonLabel = 'signup' }) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const initialValues: IAuthFormValues = {
     email: '',
     password: '',
   };
 
-  const handleSubmit = ({ email, password }: IAuthFormValues, { resetForm }: FormikHelpers<IAuthFormValues>): void => {
-    onSubmit({ values: { email, password }, reset: resetForm });
+  const handleSubmit = async (
+    { email, password }: IAuthFormValues,
+    { resetForm }: FormikHelpers<IAuthFormValues>,
+  ): Promise<void> => {
+    setIsLoading(true);
+
+    await onSubmit({ values: { email, password }, reset: resetForm });
+
+    setIsLoading(false);
   };
 
   return (
@@ -58,7 +67,7 @@ const AuthForm: React.FC<IAuthFormProps> = ({ onSubmit, buttonLabel = 'signup' }
             />
           </div>
 
-          <Button type="submit">{buttonLabel}</Button>
+          <LoadingButton isLoading={isLoading}>{buttonLabel}</LoadingButton>
         </form>
       )}
     </Formik>
