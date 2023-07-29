@@ -9,6 +9,7 @@ import WithAuth from '@/components/hocs/WithAuth';
 import ExpenseDetails from '@/components/pages/expense/ExpenseDetails';
 import Button from '@/components/shared/Button';
 import Loader from '@/components/shared/Loader';
+import LoadingButton from '@/components/shared/LoadingButton';
 import { hidePopup, showPopup } from '@/store/popup/popup.slice';
 import { useAppDispatch } from '@/store/store';
 import { Popup } from '@/types/popup';
@@ -22,7 +23,7 @@ const ExpenseDetailsPage: React.FC = () => {
 
   const { data: expense, isLoading, isFetching } = useGetExpenseByIdQuery(Number(expenseId));
 
-  const [deleteExpense] = useDeleteExpenseMutation();
+  const [deleteExpense, { isLoading: isDeleting }] = useDeleteExpenseMutation();
 
   const isShowLoader = isLoading || isFetching;
 
@@ -37,6 +38,8 @@ const ExpenseDetailsPage: React.FC = () => {
             dispatch(hidePopup());
           },
           onConfirm: async () => {
+            dispatch(hidePopup());
+
             try {
               await deleteExpense(expense.id);
 
@@ -46,8 +49,6 @@ const ExpenseDetailsPage: React.FC = () => {
             } catch (error) {
               toast('Something went wrong!');
             }
-
-            dispatch(hidePopup());
           },
         },
       }),
@@ -62,7 +63,7 @@ const ExpenseDetailsPage: React.FC = () => {
     <div>
       <div className="mb-5">
         {isShowLoader && (
-          <div className="flex justify-center m-5">
+          <div className="m-auto mt-5 mb-5 w-10 h-10">
             <Loader />
           </div>
         )}
@@ -71,9 +72,9 @@ const ExpenseDetailsPage: React.FC = () => {
       </div>
 
       <div className="mb-3">
-        <Button onClick={handleDeleteExpense} isOutlined>
+        <LoadingButton onClick={handleDeleteExpense} isOutlined isLoading={isDeleting}>
           delete
-        </Button>
+        </LoadingButton>
       </div>
 
       <Button onClick={handleBack}>back</Button>
