@@ -2,13 +2,14 @@
 
 import { Formik } from 'formik';
 import { useRouter } from 'next/navigation';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { useCreateCategoryMutation } from '@/api/category.api';
 import withAuth from '@/components/hocs/WithAuth';
 import Button from '@/components/shared/Button';
 import Input from '@/components/shared/Input';
+import LoadingButton from '@/components/shared/LoadingButton';
 import { addCategoryValidationSchema } from '@/constants/validation/add-category.schema';
 
 interface IAddCategoryFormValues {
@@ -20,11 +21,15 @@ const AddCategory: React.FC = () => {
 
   const [createCategory] = useCreateCategoryMutation();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const initialValues: IAddCategoryFormValues = {
     name: '',
   };
 
   const handleSubmit = async ({ name }: IAddCategoryFormValues): Promise<void> => {
+    setIsLoading(true);
+
     try {
       await createCategory({ name });
 
@@ -34,6 +39,8 @@ const AddCategory: React.FC = () => {
     } catch (error) {
       toast('Something went wrong');
     }
+
+    setIsLoading(false);
   };
 
   const handleBack = useCallback(() => {
@@ -56,7 +63,9 @@ const AddCategory: React.FC = () => {
           </div>
 
           <div className="mb-5">
-            <Button type="submit">add</Button>
+            <LoadingButton type="submit" isLoading={isLoading}>
+              add
+            </LoadingButton>
           </div>
 
           <Button type="button" onClick={handleBack} isOutlined>
