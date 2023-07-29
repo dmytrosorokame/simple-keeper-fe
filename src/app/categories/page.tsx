@@ -9,8 +9,9 @@ import Button from '@/components/shared/Button';
 import Loader from '@/components/shared/Loader';
 
 const Categories: React.FC = () => {
-  const { data: categories = [], isFetching, isLoading } = useGetAllCategoriesQuery();
   const router = useRouter();
+
+  const { data: categories = [], isFetching, isLoading } = useGetAllCategoriesQuery();
 
   const isShowLoader = isFetching || isLoading;
 

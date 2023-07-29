@@ -9,7 +9,7 @@ interface ICategoriesListProps {
 
 const CategoryList: React.FC<ICategoriesListProps> = ({ categories }) => (
   <>
-    {categories ? (
+    {categories.length ? (
       <ul>
         {categories.map((category) => (
           <div className="mt-2" key={category.id}>
