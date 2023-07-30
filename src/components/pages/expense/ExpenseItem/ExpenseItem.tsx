@@ -4,6 +4,7 @@ import React, { useMemo } from 'react';
 import { useGetAllCategoriesQuery } from '@/api/category.api';
 import Loader from '@/components/shared/Loader';
 import { DEFAULT_CATEGORY } from '@/constants/category';
+import { Pages } from '@/constants/pages';
 import { IExpense } from '@/types/expenses';
 import { formatDate } from '@/utils/date';
 
@@ -27,7 +28,9 @@ const ExpenseItem: React.FC<IExpenseItemProps> = ({ expense }) => {
   const formattedDate = formatDate(expense.createdAt);
 
   const handleOpenDetails = (): void => {
-    router.push(`/expense-details?expenseId=${expense.id}`);
+    const route = `${Pages.EXPENSE_DETAILS}?expenseId=${expense.id}`;
+
+    router.push(route);
   };
 
   return (

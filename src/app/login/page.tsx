@@ -2,39 +2,46 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { toast } from 'react-toastify';
 
 import { useLoginMutation } from '@/api/auth.api';
 import AuthForm from '@/components/generic/AuthForm';
 import { ISubmitAuthFormParams } from '@/components/generic/AuthForm/AuthForm';
+import { Pages } from '@/constants/pages';
 import { setCredentials } from '@/store/auth/auth.slice';
 import { useAppDispatch } from '@/store/store';
 import { IError } from '@/types/error';
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
-
-  const [login] = useLoginMutation();
   const router = useRouter();
 
-  const handleSubmit = async ({ values, reset }: ISubmitAuthFormParams): Promise<void> => {
-    const result = await login(values);
+  const [login] = useLoginMutation();
 
-    if ('error' in result) {
-      const error = result.error as IError;
+  const handleSubmit = useCallback(
+    async ({ values, reset }: ISubmitAuthFormParams): Promise<void> => {
+      const result = await login(values);
 
-      toast(error.data.message);
+      const isError = 'error' in result;
 
-      return;
-    }
+      if (isError) {
+        const error = result.error as IError;
+        const errorMessage = error.data.message;
 
-    dispatch(setCredentials(result.data));
+        toast(errorMessage);
 
-    router.push('/');
-    reset();
-    toast('You logged in successfully!');
-  };
+        return;
+      }
+
+      dispatch(setCredentials(result.data));
+
+      router.push(Pages.MAIN);
+      reset();
+      toast('You logged in successfully!');
+    },
+    [dispatch, login, router],
+  );
 
   return (
     <>

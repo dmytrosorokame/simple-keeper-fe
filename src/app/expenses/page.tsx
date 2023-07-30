@@ -8,6 +8,7 @@ import withAuth from '@/components/hocs/WithAuth';
 import ExpensesByMonthList from '@/components/pages/expense/ExpensesByMonthList';
 import Button from '@/components/shared/Button';
 import Loader from '@/components/shared/Loader';
+import { Pages } from '@/constants/pages';
 
 const Expenses: React.FC = () => {
   const router = useRouter();
@@ -17,7 +18,7 @@ const Expenses: React.FC = () => {
   const isShowLoader = isFetching || isLoading;
 
   const handleAddExpense = useCallback(() => {
-    router.push('/add-expense');
+    router.push(Pages.ADD_EXPENSE);
   }, [router]);
 
   const handleBack = useCallback(() => {
