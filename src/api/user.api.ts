@@ -1,11 +1,14 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
+import { COOKIE_EXPIRATION_TIME } from '@/constants/cookie.constants';
 import { IAuthResponse } from '@/types/auth';
 import { IUser } from '@/types/user';
 
+const baseUrl = process.env.NEXT_PUBLIC_API_PATH;
+
 const fetchUserData = async (accessToken: string): Promise<IUser> => {
-  const response = await axios.get<IUser>(`${process.env.NEXT_PUBLIC_API_PATH}/users/me`, {
+  const response = await axios.get<IUser>(`${baseUrl}/users/me`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
@@ -15,14 +18,11 @@ const fetchUserData = async (accessToken: string): Promise<IUser> => {
 };
 
 const refreshTokens = async (refreshToken: string): Promise<IAuthResponse> => {
-  const response = await axios.get<{ accessToken: string; refreshToken: string }>(
-    `${process.env.NEXT_PUBLIC_API_PATH}/auth/refresh`,
-    {
-      headers: {
-        Authorization: `Bearer ${refreshToken}`,
-      },
+  const response = await axios.get<{ accessToken: string; refreshToken: string }>(`${baseUrl}/auth/refresh`, {
+    headers: {
+      Authorization: `Bearer ${refreshToken}`,
     },
-  );
+  });
 
   return response.data;
 };
@@ -49,8 +49,8 @@ export const authorizeUser = async (): Promise<IUser & IAuthResponse> => {
         try {
           const { refreshToken: newRefreshToken, accessToken } = await refreshTokens(refreshToken);
 
-          Cookies.set('accessToken', accessToken, { expires: 7 });
-          Cookies.set('refreshToken', newRefreshToken, { expires: 7 });
+          Cookies.set('accessToken', accessToken, { expires: COOKIE_EXPIRATION_TIME });
+          Cookies.set('refreshToken', newRefreshToken, { expires: COOKIE_EXPIRATION_TIME });
 
           const userData = await fetchUserData(accessToken);
 

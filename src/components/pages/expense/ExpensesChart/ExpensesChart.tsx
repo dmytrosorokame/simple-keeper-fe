@@ -1,5 +1,5 @@
-import React from 'react';
-import { Doughnut } from 'react-chartjs-2';
+import React, { useMemo } from 'react';
+import { Doughnut as Chart } from 'react-chartjs-2';
 
 import { TExpensesByCategory } from '@/types/expenses';
 import { calculateSpendByCategory } from '@/utils/calculateSpendByCategory';
@@ -10,23 +10,26 @@ interface IExpensesChartProps {
 }
 
 const ExpensesChart: React.FC<IExpensesChartProps> = ({ expensesByCategory }) => {
-  const labels = Object.keys(expensesByCategory);
-  const backgroundColor = labels.map(() => generateRandomColor());
+  const labels = useMemo(() => Object.keys(expensesByCategory), [expensesByCategory]);
+  const backgroundColor = useMemo(() => labels.map(() => generateRandomColor()), [labels]);
 
-  const spendByCategory = calculateSpendByCategory(expensesByCategory);
+  const spendByCategory = useMemo(() => calculateSpendByCategory(expensesByCategory), [expensesByCategory]);
 
-  const data = {
-    labels,
-    datasets: [
-      {
-        data: Object.values(spendByCategory),
-        backgroundColor,
-        hoverBackgroundColor: backgroundColor,
-      },
-    ],
-  };
+  const data = useMemo(
+    () => ({
+      labels,
+      datasets: [
+        {
+          data: Object.values(spendByCategory),
+          backgroundColor,
+          hoverBackgroundColor: backgroundColor,
+        },
+      ],
+    }),
+    [labels, spendByCategory, backgroundColor],
+  );
 
-  return <Doughnut data={data} />;
+  return <Chart data={data} />;
 };
 
 export default ExpensesChart;

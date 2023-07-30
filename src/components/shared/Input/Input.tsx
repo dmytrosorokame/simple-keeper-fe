@@ -1,7 +1,7 @@
 'use client';
 
 import cn from 'classnames';
-import React, { DetailedHTMLProps, InputHTMLAttributes, useState } from 'react';
+import React, { DetailedHTMLProps, InputHTMLAttributes, useCallback, useState } from 'react';
 
 import CloseEye from '@/components/icons/CloseEye';
 import Cross from '@/components/icons/Cross';
@@ -20,9 +20,9 @@ const Input: React.FC<TInputProps> = ({ onCrossClick, isCrossVisible, error, typ
 
   const isPasswordType = type === 'password';
 
-  const onEyeClick = (): void => {
+  const onEyeClick = useCallback((): void => {
     setIsPasswordVisible((prev) => !prev);
-  };
+  }, []);
 
   return (
     <div>

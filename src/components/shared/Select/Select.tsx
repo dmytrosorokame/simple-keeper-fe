@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import Arrow from '@/components/icons/Arrow';
 import { ISelectOption } from '@/types/common';
@@ -15,15 +15,18 @@ const Select: React.FC<ISelectProps> = ({ options, onChange, selectedOption }) =
 
   const ref = useRef<HTMLDivElement>(null);
 
-  const handleToggle = (): void => {
+  const handleToggle = useCallback((): void => {
     setIsOpen((prevState) => !prevState);
-  };
+  }, []);
 
-  const handleSelectChange = (option: ISelectOption): void => {
-    onChange?.(option);
+  const handleChange = useCallback(
+    (option: ISelectOption): void => {
+      onChange?.(option);
 
-    setIsOpen(false);
-  };
+      setIsOpen(false);
+    },
+    [onChange],
+  );
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent): void => {
@@ -65,7 +68,7 @@ const Select: React.FC<ISelectProps> = ({ options, onChange, selectedOption }) =
             <button
               key={option.value}
               className="text-black cursor-pointer h-10 flex items-center hover:bg-gray-200 w-full"
-              onClick={(): void => handleSelectChange(option)}
+              onClick={(): void => handleChange(option)}
             >
               <span className="ml-3 block font-normal truncate">{option.label}</span>
             </button>

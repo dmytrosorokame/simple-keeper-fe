@@ -10,9 +10,9 @@ interface IExpenseListProps {
 const ExpenseList: React.FC<IExpenseListProps> = ({ expenses }) => (
   <ul>
     {expenses.map((expense) => (
-      <div className="mt-2" key={expense.id}>
+      <li className="mt-2" key={expense.id}>
         <ExpenseItem expense={expense} />
-      </div>
+      </li>
     ))}
   </ul>
 );

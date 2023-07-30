@@ -12,7 +12,7 @@ interface IExpensesByMonthListProps {
 const ExpensesByMonthList: React.FC<IExpensesByMonthListProps> = ({ expenses }) => {
   const groupedByDateExpenses = useMemo(() => groupExpensesByMonth(expenses), [expenses]);
 
-  const dates = Object.keys(groupedByDateExpenses);
+  const dates = useMemo(() => Object.keys(groupedByDateExpenses), [groupedByDateExpenses]);
 
   return (
     <>

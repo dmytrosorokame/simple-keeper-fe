@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 
 import { useGetAllCategoriesQuery } from '@/api/category.api';
 import ExpenseDetail from '@/components/pages/expense/ExpenseDetail';
-import { DEFAULT_CATEGORY } from '@/constants/category.constants';
+import { DEFAULT_CATEGORY_NAME } from '@/constants/category.constants';
 import { IExpense } from '@/types/expenses';
 import { formatDate } from '@/utils/date';
 
@@ -16,7 +16,7 @@ const ExpenseDetails: React.FC<IExpenseDetailsProps> = ({ expense }) => {
   const categoryName = useMemo(() => {
     const category = categories?.find((category) => category.id === expense?.categoryId);
 
-    return category?.name ?? DEFAULT_CATEGORY;
+    return category?.name ?? DEFAULT_CATEGORY_NAME;
   }, [categories, expense]);
 
   const formattedDate = useMemo(() => {
