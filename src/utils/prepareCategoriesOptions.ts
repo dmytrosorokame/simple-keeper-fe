@@ -1,4 +1,4 @@
-import { DEFAULT_CATEGORY_OPTION } from '@/constants/category';
+import { DEFAULT_CATEGORY_OPTION } from '@/constants/category.constants';
 import { ICategory } from '@/types/categories';
 import { ISelectOption } from '@/types/common';
 

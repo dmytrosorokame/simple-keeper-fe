@@ -3,8 +3,8 @@ import React, { useMemo } from 'react';
 
 import { useGetAllCategoriesQuery } from '@/api/category.api';
 import Loader from '@/components/shared/Loader';
-import { DEFAULT_CATEGORY } from '@/constants/category';
-import { Pages } from '@/constants/pages';
+import { DEFAULT_CATEGORY } from '@/constants/category.constants';
+import { Pages } from '@/constants/pages.constants';
 import { IExpense } from '@/types/expenses';
 import { formatDate } from '@/utils/date';
 
@@ -19,7 +19,7 @@ const ExpenseItem: React.FC<IExpenseItemProps> = ({ expense }) => {
 
   const isShowLoader = isFetching || isLoading;
 
-  const category = useMemo(() => {
+  const categoryName = useMemo(() => {
     const category = categories?.find((category) => category.id === expense.categoryId);
 
     return category?.name ?? DEFAULT_CATEGORY;
@@ -37,15 +37,7 @@ const ExpenseItem: React.FC<IExpenseItemProps> = ({ expense }) => {
     <button className="flex w-full justify-between pb-2 border-b-black border-b-2" onClick={handleOpenDetails}>
       <p className="w-1/3 text-left">{expense.amount}</p>
 
-      <p className="w-1/3 text-center">
-        {isShowLoader ? (
-          <div className="w-5 h-5 m-auto">
-            <Loader />
-          </div>
-        ) : (
-          category
-        )}
-      </p>
+      <p className="w-1/3 text-center">{isShowLoader ? <Loader className="w-5 h-5 m-auto" /> : categoryName}</p>
 
       <p className="w-1/3 text-right">{formattedDate}</p>
     </button>

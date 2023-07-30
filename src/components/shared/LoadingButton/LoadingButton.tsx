@@ -9,15 +9,7 @@ interface ILoadingButtonProps extends IButtonProps {
 }
 
 const LoadingButton: React.FC<PropsWithChildren<ILoadingButtonProps>> = ({ children, isLoading, ...rest }) => (
-  <Button {...rest}>
-    {isLoading ? (
-      <div className="w-6 h-6">
-        <Loader />
-      </div>
-    ) : (
-      children
-    )}
-  </Button>
+  <Button {...rest}>{isLoading ? <Loader className="w-6 h-6" /> : children}</Button>
 );
 
 export default LoadingButton;

@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 
 import { useGetAllCategoriesQuery } from '@/api/category.api';
 import ExpenseDetail from '@/components/pages/expense/ExpenseDetail';
-import { DEFAULT_CATEGORY } from '@/constants/category';
+import { DEFAULT_CATEGORY } from '@/constants/category.constants';
 import { IExpense } from '@/types/expenses';
 import { formatDate } from '@/utils/date';
 

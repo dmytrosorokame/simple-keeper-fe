@@ -1,16 +1,12 @@
 'use client';
 import { usePathname } from 'next/navigation';
-import React, { MouseEventHandler, useEffect } from 'react';
+import React, { MouseEventHandler, useCallback, useEffect } from 'react';
 
-import SubmitPopup from '@/components/popups/SubmitPopup';
+import { POPUPS_CONFIG } from '@/constants/popup.constants';
 import { shownPopupSelector } from '@/store/popup/popup.selectors';
 import { hidePopup } from '@/store/popup/popup.slice';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { Popup } from '@/types/popup';
-
-const popupsConfig: Record<Popup, React.FC> = {
-  [Popup.SUBMIT]: SubmitPopup,
-};
 
 const PopupManager: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -19,14 +15,17 @@ const PopupManager: React.FC = () => {
   const shownPopupName = useAppSelector(shownPopupSelector);
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  const PopupToShow = shownPopupName ? popupsConfig[shownPopupName] : null;
-  const hasPopupToShow = !!shownPopupName && !!PopupToShow;
+  const PopupToShow = shownPopupName ? POPUPS_CONFIG[shownPopupName as Popup] : null;
+  const hasPopupToShow = !!PopupToShow;
 
-  const onBackdropClick: MouseEventHandler<HTMLDivElement> = (e) => {
-    if (e.target === e.currentTarget) {
-      dispatch(hidePopup());
-    }
-  };
+  const onBackdropClick: MouseEventHandler<HTMLDivElement> = useCallback(
+    (e) => {
+      if (e.target === e.currentTarget) {
+        dispatch(hidePopup());
+      }
+    },
+    [dispatch],
+  );
 
   useEffect(() => {
     if (hasPopupToShow) {

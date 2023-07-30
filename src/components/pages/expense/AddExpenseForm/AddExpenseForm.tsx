@@ -5,7 +5,7 @@ import { useGetAllCategoriesQuery } from '@/api/category.api';
 import Input from '@/components/shared/Input';
 import LoadingButton from '@/components/shared/LoadingButton/LoadingButton';
 import Select from '@/components/shared/Select';
-import { DEFAULT_CATEGORY_OPTION } from '@/constants/category';
+import { DEFAULT_CATEGORY_OPTION } from '@/constants/category.constants';
 import { addExpenseValidationSchema } from '@/constants/validation/add-expense.schema';
 import { IAddExpenseFormValues } from '@/types/forms';
 import { prepareCategoriesOptions } from '@/utils/prepareCategoriesOptions';

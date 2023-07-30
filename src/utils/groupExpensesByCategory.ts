@@ -1,4 +1,4 @@
-import { DEFAULT_CATEGORY } from '@/constants/category';
+import { DEFAULT_CATEGORY } from '@/constants/category.constants';
 import { IExpense, TExpensesByCategory } from '@/types/expenses';
 
 export const groupExpensesByCategory = (expenses: IExpense[]): TExpensesByCategory => {

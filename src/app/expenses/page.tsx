@@ -8,7 +8,7 @@ import withAuth from '@/components/hocs/WithAuth';
 import ExpensesByMonthList from '@/components/pages/expense/ExpensesByMonthList';
 import Button from '@/components/shared/Button';
 import Loader from '@/components/shared/Loader';
-import { Pages } from '@/constants/pages';
+import { Pages } from '@/constants/pages.constants';
 
 const Expenses: React.FC = () => {
   const router = useRouter();
@@ -17,7 +17,7 @@ const Expenses: React.FC = () => {
 
   const isShowLoader = isFetching || isLoading;
 
-  const handleAddExpense = useCallback(() => {
+  const handleAdd = useCallback(() => {
     router.push(Pages.ADD_EXPENSE);
   }, [router]);
 
@@ -28,17 +28,11 @@ const Expenses: React.FC = () => {
   return (
     <>
       <div className="mb-10">
-        {isShowLoader ? (
-          <div className="w-10 h-10 m-auto">
-            <Loader />
-          </div>
-        ) : (
-          <ExpensesByMonthList expenses={expenses} />
-        )}
+        {isShowLoader ? <Loader className="w-10 h-10 m-auto" /> : <ExpensesByMonthList expenses={expenses} />}
       </div>
 
       <div className="mb-5">
-        <Button onClick={handleAddExpense}>add</Button>
+        <Button onClick={handleAdd}>add</Button>
       </div>
 
       <Button onClick={handleBack} isOutlined>

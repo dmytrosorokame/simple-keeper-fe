@@ -51,9 +51,7 @@ const ExpensesAnalytics: React.FC = () => {
       <h1 className="text-center mt-5 text-3xl mb-5">Expenses for {expensesDate}</h1>
 
       {isShowLoader ? (
-        <div className="w-10 h-10 m-auto mb-5">
-          <Loader />
-        </div>
+        <Loader className="w-10 h-10 m-auto mb-5" />
       ) : (
         <>
           <div className="m-auto max-w-xs">

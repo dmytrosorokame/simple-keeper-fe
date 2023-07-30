@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 import WithAuth from '@/components/hocs/WithAuth/WithAuth';
 import Button from '@/components/shared/Button';
-import { Pages } from '@/constants/pages';
+import { Pages } from '@/constants/pages.constants';
 import { logout } from '@/store/auth/auth.slice';
 import { showPopup } from '@/store/popup/popup.slice';
 import { useAppDispatch } from '@/store/store';

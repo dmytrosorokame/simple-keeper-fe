@@ -12,7 +12,7 @@ const WithAuth = (WrappedComponent: ComponentType): React.FC => {
     const dispatch = useAppDispatch();
 
     const isAuthenticated = useAppSelector(selectIsAuthenticated);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
       const authorize = async (): Promise<void> => {
