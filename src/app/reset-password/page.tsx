@@ -1,55 +1,56 @@
 'use client';
 
-import { Formik } from 'formik';
 import Link from 'next/link';
-import React from 'react';
+import { useRouter } from 'next/navigation';
+import React, { useCallback } from 'react';
+import { toast } from 'react-toastify';
 
-import Button from '@/components/shared/Button';
-import Input from '@/components/shared/Input';
-import { resetPasswordValidationSchema } from '@/constants/validation/reset-password.schema';
-
-interface IResetPasswordFormValues {
-  email: string;
-}
+import { useResetPasswordMutation } from '@/api/auth.api';
+import ResetPasswordForm from '@/components/pages/auth/ResetPasswordForm';
+import { Pages } from '@/constants/pages.constants';
+import { IError } from '@/types/error';
+import { IResetPasswordFormValues } from '@/types/forms';
 
 const ResetPassword: React.FC = () => {
-  const initialValues: IResetPasswordFormValues = {
-    email: '',
-  };
+  const router = useRouter();
 
-  const handleSubmit = (values: IResetPasswordFormValues): void => {
-    // eslint-disable-next-line no-console
-    console.log({ values });
-  };
+  const [resetPassword, { isLoading }] = useResetPasswordMutation();
+
+  const handleSubmit = useCallback(
+    async ({ email }: IResetPasswordFormValues): Promise<void> => {
+      const result = await resetPassword(email);
+
+      const isError = 'error' in result;
+
+      if (isError) {
+        const error = result.error as IError;
+        const errorMessage = error.data.message;
+
+        toast(errorMessage);
+
+        return;
+      }
+
+      toast('Check your email to reset password!');
+
+      router.push(Pages.LOGIN);
+    },
+    [resetPassword, router],
+  );
 
   return (
-    <Formik onSubmit={handleSubmit} initialValues={initialValues} validationSchema={resetPasswordValidationSchema}>
-      {({ values, handleChange, setFieldValue, handleSubmit, errors, touched }) => (
-        <form onSubmit={handleSubmit}>
-          <div className="mb-5">
-            <Input
-              placeholder="email"
-              value={values.email}
-              onChange={handleChange('values')}
-              isCrossVisible={!!values.email}
-              onCrossClick={() => setFieldValue('email', '')}
-              error={errors.email && touched.email ? errors.email : null}
-            />
-          </div>
+    <>
+      <ResetPasswordForm onSubmit={handleSubmit} isLoading={isLoading} />
 
-          <Button type="submit">reset</Button>
-
-          <div className="mt-2">
-            <p>
-              Remember your password? –{' '}
-              <Link href="/login" className="underline">
-                login
-              </Link>
-            </p>
-          </div>
-        </form>
-      )}
-    </Formik>
+      <div className="mt-2">
+        <p>
+          Remember your password? –{' '}
+          <Link href={Pages.LOGIN} className="underline">
+            login
+          </Link>
+        </p>
+      </div>
+    </>
   );
 };
 

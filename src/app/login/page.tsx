@@ -50,8 +50,15 @@ const Login: React.FC = () => {
       <div className="mt-2 flex justify-between">
         <p>
           Don't have an account? –{' '}
-          <Link href="/signup" className="underline">
+          <Link href={Pages.SIGNUP} className="underline">
             signup
+          </Link>
+        </p>
+
+        <p>
+          Forgot your password? –{' '}
+          <Link href={Pages.RESET_PASSWORD} className="underline">
+            reset password
           </Link>
         </p>
       </div>

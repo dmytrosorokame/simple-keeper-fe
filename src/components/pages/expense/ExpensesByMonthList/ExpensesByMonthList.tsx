@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React, { useMemo } from 'react';
 
 import ExpenseList from '@/components/pages/expense/ExpenseList';
+import { Pages } from '@/constants/pages.constants';
 import { IExpense } from '@/types/expenses';
 import { groupExpensesByMonth } from '@/utils/groupExpensesByMonth';
 
@@ -18,15 +19,19 @@ const ExpensesByMonthList: React.FC<IExpensesByMonthListProps> = ({ expenses }) 
     <>
       {dates.length ? (
         <ul>
-          {dates.map((date) => (
-            <li className="mt-2" key={date}>
-              <Link href={`/expenses-analytics?date=${date}`} className="mb-5 text-2xl underline">
-                {date}
-              </Link>
+          {dates.map((date) => {
+            const pageHref = `${Pages.EXPENSES_ANALYTICS}?date=${date}`;
 
-              <ExpenseList expenses={groupedByDateExpenses[date]} />
-            </li>
-          ))}
+            return (
+              <li className="mt-2" key={date}>
+                <Link href={pageHref} className="mb-5 text-2xl underline">
+                  {date}
+                </Link>
+
+                <ExpenseList expenses={groupedByDateExpenses[date]} />
+              </li>
+            );
+          })}
         </ul>
       ) : (
         <p className="text-center">No expenses!</p>

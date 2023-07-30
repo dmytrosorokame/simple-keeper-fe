@@ -10,3 +10,7 @@ export interface IAddExpenseFormValues {
 export interface IAddCategoryFormValues {
   name: string;
 }
+
+export interface IResetPasswordFormValues {
+  email: string;
+}
