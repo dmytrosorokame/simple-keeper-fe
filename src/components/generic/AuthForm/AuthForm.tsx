@@ -1,5 +1,5 @@
 import { Formik, FormikHelpers } from 'formik';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 
 import Input from '@/components/shared/Input';
 import LoadingButton from '@/components/shared/LoadingButton';
@@ -24,19 +24,14 @@ export interface ISubmitAuthFormParams {
 interface IAuthFormProps {
   onSubmit: (data: ISubmitAuthFormParams) => Promise<void>;
   buttonLabel?: string;
+  isLoading: boolean;
 }
 
-const AuthForm: React.FC<IAuthFormProps> = ({ onSubmit, buttonLabel = 'signup' }) => {
-  const [isLoading, setIsLoading] = useState(false);
-
+const AuthForm: React.FC<IAuthFormProps> = ({ onSubmit, buttonLabel = 'signup', isLoading }) => {
   const handleSubmit = useCallback(
-    async (values: IAuthFormValues, { resetForm: reset }: FormikHelpers<IAuthFormValues>): Promise<void> => {
-      setIsLoading(true);
+    async (values: IAuthFormValues, { resetForm: reset }: FormikHelpers<IAuthFormValues>): Promise<void> =>
+      onSubmit({ values, reset }),
 
-      await onSubmit({ values, reset });
-
-      setIsLoading(false);
-    },
     [onSubmit],
   );
 

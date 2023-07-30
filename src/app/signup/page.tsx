@@ -17,7 +17,7 @@ const SignUp: React.FC = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const [signUp] = useSignUpMutation();
+  const [signUp, { isLoading }] = useSignUpMutation();
 
   const handleSubmit = useCallback(
     async ({ values, reset }: ISubmitAuthFormParams): Promise<void> => {
@@ -45,7 +45,7 @@ const SignUp: React.FC = () => {
 
   return (
     <>
-      <AuthForm onSubmit={handleSubmit} />
+      <AuthForm onSubmit={handleSubmit} isLoading={isLoading} />
 
       <div className="mt-2">
         <p>

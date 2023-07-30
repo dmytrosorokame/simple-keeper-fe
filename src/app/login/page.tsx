@@ -17,7 +17,7 @@ const Login: React.FC = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const [login] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
 
   const handleSubmit = useCallback(
     async ({ values, reset }: ISubmitAuthFormParams): Promise<void> => {
@@ -45,7 +45,7 @@ const Login: React.FC = () => {
 
   return (
     <>
-      <AuthForm onSubmit={handleSubmit} buttonLabel="login" />
+      <AuthForm onSubmit={handleSubmit} buttonLabel="login" isLoading={isLoading} />
 
       <div className="mt-2 flex justify-between">
         <p>
