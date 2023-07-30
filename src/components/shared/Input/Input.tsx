@@ -38,13 +38,13 @@ const Input: React.FC<TInputProps> = ({ onCrossClick, isCrossVisible, error, typ
         />
 
         {isCrossVisible && !isPasswordType && (
-          <button onClick={onCrossClick} className="absolute right-3 top-1/2 -translate-y-1/2">
+          <button onClick={onCrossClick} className="absolute right-3 top-1/2 -translate-y-1/2" type="button">
             <Cross />
           </button>
         )}
 
         {isPasswordType && (
-          <button onClick={onEyeClick} className="absolute right-3 top-1/2 -translate-y-1/2">
+          <button onClick={onEyeClick} className="absolute right-3 top-1/2 -translate-y-1/2" type="button">
             {isPasswordVisible ? <CloseEye /> : <Eye />}
           </button>
         )}
