@@ -184,7 +184,7 @@ module.exports = {
       },
     },
     {
-      files: ['*.test.*', '*.spec.*', 'src/app/**/*', '*.js'],
+      files: ['*.test.*', '*.spec.*', 'src/app/**/*', '*.js', 'src/stories/**/*'],
       rules: {
         'import/no-unused-modules': 'off',
       },
