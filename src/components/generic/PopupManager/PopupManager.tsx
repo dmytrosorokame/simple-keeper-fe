@@ -14,7 +14,6 @@ const PopupManager: React.FC = () => {
 
   const shownPopupName = useAppSelector(shownPopupSelector);
 
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   const PopupToShow = shownPopupName ? POPUPS_CONFIG[shownPopupName as Popup] : null;
   const hasPopupToShow = !!PopupToShow;
 

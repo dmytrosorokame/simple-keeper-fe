@@ -123,7 +123,7 @@ module.exports = {
           {
             selector: 'variable',
             modifiers: ['const'],
-            format: ['UPPER_CASE', 'camelCase'],
+            format: ['UPPER_CASE', 'camelCase', 'PascalCase'],
           },
           {
             selector: 'variable',
@@ -187,6 +187,12 @@ module.exports = {
       files: ['*.test.*', '*.spec.*', 'src/app/**/*', '*.js', 'src/stories/**/*'],
       rules: {
         'import/no-unused-modules': 'off',
+      },
+    },
+    {
+      files: ['*.stories.*'],
+      rules: {
+        'no-relative-import-paths/no-relative-import-paths': 'off',
       },
     },
   ],
