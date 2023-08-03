@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 
-import { Pages } from '@/constants/pages.constants';
+import { Pages } from '../../../constants/pages.constants';
 
 const NotAuthenticated: React.FC = () => (
   <div className="text-center absolute w-screen h-screen top-0 left-0 bg-white flex justify-center items-center">

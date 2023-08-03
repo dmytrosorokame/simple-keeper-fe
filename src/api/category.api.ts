@@ -1,8 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { ApiTags } from '@/constants/apiTags.constants';
-import { TRootState } from '@/store/store';
-import { ICategory } from '@/types/categories';
+import { ApiTags } from '../constants/apiTags.constants';
+import { TRootState } from '../store/store';
+import { ICategory } from '../types/categories';
+
 interface ICreateCategoryDto {
   name: string;
 }

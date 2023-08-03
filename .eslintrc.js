@@ -32,7 +32,6 @@ module.exports = {
         },
       },
     ],
-    'no-relative-import-paths/no-relative-import-paths': ['error', { allowSameFolder: true, rootDir: 'src' }],
     'import/no-unused-modules': ['error', { unusedExports: true, missingExports: true }],
     'import/no-unresolved': 'error',
     'unused-imports/no-unused-imports-ts': 'error',
@@ -187,12 +186,6 @@ module.exports = {
       files: ['*.test.*', '*.spec.*', 'src/app/**/*', '*.js', 'src/stories/**/*'],
       rules: {
         'import/no-unused-modules': 'off',
-      },
-    },
-    {
-      files: ['*.stories.*'],
-      rules: {
-        'no-relative-import-paths/no-relative-import-paths': 'off',
       },
     },
   ],

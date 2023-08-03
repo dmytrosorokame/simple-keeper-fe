@@ -1,5 +1,5 @@
-import { TRootState } from '@/store/store';
-import { IPopupData, Popup } from '@/types/popup';
+import { IPopupData, Popup } from '../../types/popup';
+import { TRootState } from '../store';
 
 export const popupDataSelector = (state: TRootState): IPopupData | null => state.popup.popupData;
 

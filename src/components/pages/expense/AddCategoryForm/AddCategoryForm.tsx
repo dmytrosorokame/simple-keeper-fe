@@ -1,10 +1,10 @@
 import { Formik } from 'formik';
 import React from 'react';
 
-import Input from '@/components/shared/Input';
-import LoadingButton from '@/components/shared/LoadingButton';
-import { addCategoryValidationSchema } from '@/constants/validation/add-category.schema';
-import { IAddCategoryFormValues } from '@/types/forms';
+import { addCategoryValidationSchema } from '../../../../constants/validation/add-category.schema';
+import { IAddCategoryFormValues } from '../../../../types/forms';
+import Input from '../../../shared/Input';
+import LoadingButton from '../../../shared/LoadingButton';
 
 const initialValues: IAddCategoryFormValues = {
   name: '',

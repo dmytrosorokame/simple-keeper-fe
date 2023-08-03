@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
 
-import Button from '@/components/shared/Button';
-import Popup from '@/components/shared/Popup';
-import { popupDataSelector } from '@/store/popup/popup.selectors';
-import { hidePopup } from '@/store/popup/popup.slice';
-import { useAppDispatch, useAppSelector } from '@/store/store';
+import { popupDataSelector } from '../../../store/popup/popup.selectors';
+import { hidePopup } from '../../../store/popup/popup.slice';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
+import Button from '../../shared/Button';
+import Popup from '../../shared/Popup';
 
 const SubmitPopup: React.FC = () => {
   const dispatch = useAppDispatch();

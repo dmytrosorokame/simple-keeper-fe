@@ -2,11 +2,11 @@
 import { usePathname } from 'next/navigation';
 import React, { MouseEventHandler, useCallback, useEffect } from 'react';
 
-import { POPUPS_CONFIG } from '@/constants/popup.constants';
-import { shownPopupSelector } from '@/store/popup/popup.selectors';
-import { hidePopup } from '@/store/popup/popup.slice';
-import { useAppDispatch, useAppSelector } from '@/store/store';
-import { Popup } from '@/types/popup';
+import { POPUPS_CONFIG } from '../../../constants/popup.constants';
+import { shownPopupSelector } from '../../../store/popup/popup.selectors';
+import { hidePopup } from '../../../store/popup/popup.slice';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
+import { Popup } from '../../../types/popup';
 
 const PopupManager: React.FC = () => {
   const dispatch = useAppDispatch();

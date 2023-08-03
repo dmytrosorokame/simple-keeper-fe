@@ -1,11 +1,11 @@
 import React, { ComponentType, useEffect, useState } from 'react';
 
-import { authorizeUser } from '@/api/user.api';
-import NotAuthenticated from '@/components/generic/NotAuthenticated';
-import PageLoader from '@/components/shared/PageLoader';
-import { selectIsAuthenticated } from '@/store/auth/auth.selectors';
-import { setCredentials } from '@/store/auth/auth.slice';
-import { useAppDispatch, useAppSelector } from '@/store/store';
+import { authorizeUser } from '../../../api/user.api';
+import { selectIsAuthenticated } from '../../../store/auth/auth.selectors';
+import { setCredentials } from '../../../store/auth/auth.slice';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
+import NotAuthenticated from '../../generic/NotAuthenticated';
+import PageLoader from '../../shared/PageLoader';
 
 const WithAuth = (WrappedComponent: ComponentType): React.FC => {
   const WithAuthorization: React.FC = (props) => {

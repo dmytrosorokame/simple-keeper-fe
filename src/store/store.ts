@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
-import { authApi } from '@/api/auth.api';
-import { categoryApi } from '@/api/category.api';
-import { expenseApi } from '@/api/expense.api';
+import { authApi } from '../api/auth.api';
+import { categoryApi } from '../api/category.api';
+import { expenseApi } from '../api/expense.api';
 
 import authReducer from './auth/auth.slice';
 import popupReducer from './popup/popup.slice';

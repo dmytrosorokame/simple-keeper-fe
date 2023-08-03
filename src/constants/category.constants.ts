@@ -1,4 +1,4 @@
-import { ISelectOption } from '@/types/common';
+import { ISelectOption } from '../types/common';
 
 export const DEFAULT_CATEGORY_NAME = 'Other';
 

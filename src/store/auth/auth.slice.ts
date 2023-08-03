@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import Cookies from 'js-cookie';
 
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '@/constants/cookie.constants';
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '../../constants/cookie.constants';
 
 interface IAuthState {
   accessToken: string | null;

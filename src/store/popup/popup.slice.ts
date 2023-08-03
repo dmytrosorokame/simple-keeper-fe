@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import { IPopupData, Popup } from '@/types/popup';
+import { IPopupData, Popup } from '../../types/popup';
 
 interface IPopupState {
   shownPopup: Popup | null;

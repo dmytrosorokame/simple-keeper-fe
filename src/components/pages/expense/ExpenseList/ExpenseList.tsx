@@ -1,7 +1,7 @@
 import React from 'react';
 
-import ExpenseItem from '@/components/pages/expense/ExpenseItem';
-import { IExpense } from '@/types/expenses';
+import { IExpense } from '../../../../types/expenses';
+import ExpenseItem from '../ExpenseItem';
 
 interface IExpenseListProps {
   expenses: IExpense[];

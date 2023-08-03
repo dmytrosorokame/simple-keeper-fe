@@ -3,10 +3,9 @@
 import cn from 'classnames';
 import React, { DetailedHTMLProps, InputHTMLAttributes, useCallback, useState } from 'react';
 
-import CloseEye from '@/components/icons/CloseEye';
-import Cross from '@/components/icons/Cross';
-import Eye from '@/components/icons/Eye';
-
+import CloseEye from '../../icons/CloseEye';
+import Cross from '../../icons/Cross';
+import Eye from '../../icons/Eye';
 interface IInputProps {
   onCrossClick?: () => void;
   isCrossVisible?: boolean;

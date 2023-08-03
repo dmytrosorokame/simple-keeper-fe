@@ -1,12 +1,12 @@
 import { useRouter } from 'next/navigation';
 import React, { useCallback, useMemo } from 'react';
 
-import { useGetAllCategoriesQuery } from '@/api/category.api';
-import Loader from '@/components/shared/Loader';
-import { DEFAULT_CATEGORY_NAME } from '@/constants/category.constants';
-import { Pages } from '@/constants/pages.constants';
-import { IExpense } from '@/types/expenses';
-import { formatDate } from '@/utils/date';
+import { useGetAllCategoriesQuery } from '../../../../api/category.api';
+import { DEFAULT_CATEGORY_NAME } from '../../../../constants/category.constants';
+import { Pages } from '../../../../constants/pages.constants';
+import { IExpense } from '../../../../types/expenses';
+import { formatDate } from '../../../../utils/date';
+import Loader from '../../../shared/Loader';
 
 interface IExpenseItemProps {
   expense: IExpense;

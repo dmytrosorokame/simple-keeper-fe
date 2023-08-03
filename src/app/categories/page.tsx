@@ -2,12 +2,12 @@
 import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react';
 
-import { useGetAllCategoriesQuery } from '@/api/category.api';
-import withAuth from '@/components/hocs/WithAuth';
-import CategoryList from '@/components/pages/category/CategoryList';
-import Button from '@/components/shared/Button';
-import Loader from '@/components/shared/Loader';
-import { Pages } from '@/constants/pages.constants';
+import { useGetAllCategoriesQuery } from '../../api/category.api';
+import WithAuth from '../../components/hocs/WithAuth';
+import CategoryList from '../../components/pages/category/CategoryList';
+import Button from '../../components/shared/Button';
+import Loader from '../../components/shared/Loader';
+import { Pages } from '../../constants/pages.constants';
 
 const Categories: React.FC = () => {
   const router = useRouter();
@@ -41,4 +41,4 @@ const Categories: React.FC = () => {
   );
 };
 
-export default withAuth(Categories);
+export default WithAuth(Categories);

@@ -4,11 +4,11 @@ import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react';
 import { toast } from 'react-toastify';
 
-import { useCreateExpenseMutation } from '@/api/expense.api';
-import withAuth from '@/components/hocs/WithAuth';
-import AddExpenseForm from '@/components/pages/expense/AddExpenseForm';
-import Button from '@/components/shared/Button';
-import { IAddExpenseFormValues } from '@/types/forms';
+import { useCreateExpenseMutation } from '../../api/expense.api';
+import WithAuth from '../../components/hocs/WithAuth';
+import AddExpenseForm from '../../components/pages/expense/AddExpenseForm';
+import Button from '../../components/shared/Button';
+import { IAddExpenseFormValues } from '../../types/forms';
 
 const AddExpense: React.FC = () => {
   const router = useRouter();
@@ -56,4 +56,4 @@ const AddExpense: React.FC = () => {
   );
 };
 
-export default withAuth(AddExpense);
+export default WithAuth(AddExpense);

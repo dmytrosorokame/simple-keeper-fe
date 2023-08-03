@@ -4,15 +4,15 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useCallback } from 'react';
 import { toast } from 'react-toastify';
 
-import { useDeleteExpenseMutation, useGetExpenseByIdQuery } from '@/api/expense.api';
-import WithAuth from '@/components/hocs/WithAuth';
-import ExpenseDetails from '@/components/pages/expense/ExpenseDetails';
-import Button from '@/components/shared/Button';
-import Loader from '@/components/shared/Loader';
-import LoadingButton from '@/components/shared/LoadingButton';
-import { showPopup } from '@/store/popup/popup.slice';
-import { useAppDispatch } from '@/store/store';
-import { Popup } from '@/types/popup';
+import { useDeleteExpenseMutation, useGetExpenseByIdQuery } from '../../api/expense.api';
+import WithAuth from '../../components/hocs/WithAuth';
+import ExpenseDetails from '../../components/pages/expense/ExpenseDetails';
+import Button from '../../components/shared/Button';
+import Loader from '../../components/shared/Loader';
+import LoadingButton from '../../components/shared/LoadingButton';
+import { showPopup } from '../../store/popup/popup.slice';
+import { useAppDispatch } from '../../store/store';
+import { Popup } from '../../types/popup';
 
 const ExpenseDetailsPage: React.FC = () => {
   const dispatch = useAppDispatch();

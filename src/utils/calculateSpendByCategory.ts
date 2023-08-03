@@ -1,4 +1,4 @@
-import { TExpensesByCategory, TSpendByCategory } from '@/types/expenses';
+import { TExpensesByCategory, TSpendByCategory } from '../types/expenses';
 
 import { calculateTotalSpend } from './calculateTotalSpend';
 

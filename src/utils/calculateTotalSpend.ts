@@ -1,4 +1,4 @@
-import { IExpense } from '@/types/expenses';
+import { IExpense } from '../types/expenses';
 
 export const calculateTotalSpend = (expenses: IExpense[]): number => {
   return expenses.reduce((total, expense) => {

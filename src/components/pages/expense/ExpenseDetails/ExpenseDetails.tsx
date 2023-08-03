@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
 
-import { useGetAllCategoriesQuery } from '@/api/category.api';
-import ExpenseDetail from '@/components/pages/expense/ExpenseDetail';
-import { DEFAULT_CATEGORY_NAME } from '@/constants/category.constants';
-import { IExpense } from '@/types/expenses';
-import { formatDate } from '@/utils/date';
+import { useGetAllCategoriesQuery } from '../../../../api/category.api';
+import { DEFAULT_CATEGORY_NAME } from '../../../../constants/category.constants';
+import { IExpense } from '../../../../types/expenses';
+import { formatDate } from '../../../../utils/date';
+import ExpenseDetail from '../ExpenseDetail';
 
 interface IExpenseDetailsProps {
   expense: IExpense;

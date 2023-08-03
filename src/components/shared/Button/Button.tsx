@@ -3,7 +3,7 @@
 import cn from 'classnames';
 import React, { PropsWithChildren } from 'react';
 
-import { IButtonProps } from '@/types/common';
+import { IButtonProps } from '../../../types/common';
 
 const Button: React.FC<PropsWithChildren<IButtonProps>> = ({ children, disabled, isOutlined, ...rest }) => (
   <button

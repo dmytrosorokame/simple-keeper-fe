@@ -1,15 +1,14 @@
 import React, { useCallback } from 'react';
 import { toast } from 'react-toastify';
 
-import { useDeleteCategoryMutation } from '@/api/category.api';
-import Line from '@/components/icons/Line';
-import IconButton from '@/components/shared/IconButton';
-import Loader from '@/components/shared/Loader';
-import { showPopup } from '@/store/popup/popup.slice';
-import { useAppDispatch } from '@/store/store';
-import { ICategory } from '@/types/categories';
-import { Popup } from '@/types/popup';
-
+import { useDeleteCategoryMutation } from '../../../../api/category.api';
+import { showPopup } from '../../../../store/popup/popup.slice';
+import { useAppDispatch } from '../../../../store/store';
+import { ICategory } from '../../../../types/categories';
+import { Popup } from '../../../../types/popup';
+import Line from '../../../icons/Line';
+import IconButton from '../../../shared/IconButton';
+import Loader from '../../../shared/Loader';
 interface ICategoryItemProps {
   category: ICategory;
 }

@@ -1,9 +1,9 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-import { COOKIE_EXPIRATION_TIME } from '@/constants/cookie.constants';
-import { IAuthResponse } from '@/types/auth';
-import { IUser } from '@/types/user';
+import { COOKIE_EXPIRATION_TIME } from '../constants/cookie.constants';
+import { IAuthResponse } from '../types/auth';
+import { IUser } from '../types/user';
 
 const baseUrl = process.env.NEXT_PUBLIC_API_PATH;
 

@@ -1,11 +1,10 @@
 import { Formik, FormikHelpers } from 'formik';
 import React, { useCallback } from 'react';
 
-import Input from '@/components/shared/Input';
-import LoadingButton from '@/components/shared/LoadingButton';
-import { authValidationSchema } from '@/constants/validation/auth.schema';
-import { IAuthDto } from '@/types/auth';
-
+import { authValidationSchema } from '../../../constants/validation/auth.schema';
+import { IAuthDto } from '../../../types/auth';
+import Input from '../../shared/Input';
+import LoadingButton from '../../shared/LoadingButton';
 interface IAuthFormValues {
   email: string;
   password: string;

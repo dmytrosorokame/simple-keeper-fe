@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import React, { useMemo } from 'react';
 
-import ExpenseList from '@/components/pages/expense/ExpenseList';
-import { Pages } from '@/constants/pages.constants';
-import { IExpense } from '@/types/expenses';
-import { groupExpensesByMonth } from '@/utils/groupExpensesByMonth';
+import { Pages } from '../../../../constants/pages.constants';
+import { IExpense } from '../../../../types/expenses';
+import { groupExpensesByMonth } from '../../../../utils/groupExpensesByMonth';
+import ExpenseList from '../ExpenseList';
 
 interface IExpensesByMonthListProps {
   expenses: IExpense[];

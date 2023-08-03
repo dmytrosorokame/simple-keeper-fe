@@ -1,8 +1,8 @@
 import cn from 'classnames';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import Arrow from '@/components/icons/Arrow';
-import { ISelectOption } from '@/types/common';
+import { ISelectOption } from '../../../types/common';
+import Arrow from '../../icons/Arrow';
 
 interface ISelectProps {
   options: ISelectOption[];

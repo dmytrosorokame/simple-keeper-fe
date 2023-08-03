@@ -5,11 +5,11 @@ import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react';
 import { toast } from 'react-toastify';
 
-import { useResetPasswordMutation } from '@/api/auth.api';
-import ResetPasswordForm from '@/components/pages/auth/ResetPasswordForm';
-import { Pages } from '@/constants/pages.constants';
-import { IError } from '@/types/error';
-import { IResetPasswordFormValues } from '@/types/forms';
+import { useResetPasswordMutation } from '../../api/auth.api';
+import ResetPasswordForm from '../../components/pages/auth/ResetPasswordForm';
+import { Pages } from '../../constants/pages.constants';
+import { IError } from '../../types/error';
+import { IResetPasswordFormValues } from '../../types/forms';
 
 const ResetPassword: React.FC = () => {
   const router = useRouter();

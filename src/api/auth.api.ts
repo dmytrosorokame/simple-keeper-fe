@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { TRootState } from '@/store/store';
-import { IAuthDto, IAuthResponse } from '@/types/auth';
+import { TRootState } from '../store/store';
+import { IAuthDto, IAuthResponse } from '../types/auth';
 
 export const authApi = createApi({
   reducerPath: 'authApi',

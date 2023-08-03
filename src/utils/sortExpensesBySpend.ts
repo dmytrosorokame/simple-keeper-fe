@@ -1,4 +1,4 @@
-import { IExpense } from '@/types/expenses';
+import { IExpense } from '../types/expenses';
 
 import { calculateTotalSpend } from './calculateTotalSpend';
 

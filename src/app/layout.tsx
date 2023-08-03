@@ -7,11 +7,11 @@ import { usePathname } from 'next/navigation';
 import { PropsWithChildren } from 'react';
 import { ToastContainer } from 'react-toastify';
 
-import AppProvider from '@/components/generic/AppProvider';
-import PopupManager from '@/components/generic/PopupManager';
-import Heading from '@/components/shared/Heading';
-import { Pages } from '@/constants/pages.constants';
-import { PAGES_WITHOUT_HEADING } from '@/constants/pagesWithoutHeading.constants';
+import AppProvider from '../components/generic/AppProvider';
+import PopupManager from '../components/generic/PopupManager';
+import Heading from '../components/shared/Heading';
+import { Pages } from '../constants/pages.constants';
+import { PAGES_WITHOUT_HEADING } from '../constants/pagesWithoutHeading.constants';
 
 const inter = Inter({ subsets: ['latin'] });
 

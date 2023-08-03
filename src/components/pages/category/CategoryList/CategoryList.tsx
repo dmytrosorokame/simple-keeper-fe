@@ -1,7 +1,7 @@
 import React from 'react';
 
-import CategoryItem from '@/components/pages/category/CategoryItem';
-import { ICategory } from '@/types/categories';
+import { ICategory } from '../../../../types/categories';
+import CategoryItem from '../CategoryItem';
 
 interface ICategoriesListProps {
   categories: ICategory[];

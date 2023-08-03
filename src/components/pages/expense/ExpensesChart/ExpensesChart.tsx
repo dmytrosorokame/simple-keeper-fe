@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import { Doughnut as Chart } from 'react-chartjs-2';
 
-import { TExpensesByCategory } from '@/types/expenses';
-import { calculateSpendByCategory } from '@/utils/calculateSpendByCategory';
-import { generateRandomColor } from '@/utils/generateRandomColor';
+import { TExpensesByCategory } from '../../../../types/expenses';
+import { calculateSpendByCategory } from '../../../../utils/calculateSpendByCategory';
+import { generateRandomColor } from '../../../../utils/generateRandomColor';
 
 interface IExpensesChartProps {
   expensesByCategory: TExpensesByCategory;

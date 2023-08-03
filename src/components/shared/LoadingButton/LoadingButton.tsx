@@ -1,8 +1,8 @@
 import React, { PropsWithChildren } from 'react';
 
-import Button from '@/components/shared/Button';
-import Loader from '@/components/shared/Loader/Loader';
-import { IButtonProps } from '@/types/common';
+import { IButtonProps } from '../../../types/common';
+import Button from '../Button';
+import Loader from '../Loader';
 
 interface ILoadingButtonProps extends IButtonProps {
   isLoading: boolean;

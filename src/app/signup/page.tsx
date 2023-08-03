@@ -5,13 +5,13 @@ import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react';
 import { toast } from 'react-toastify';
 
-import { useSignUpMutation } from '@/api/auth.api';
-import AuthForm from '@/components/generic/AuthForm';
-import { ISubmitAuthFormParams } from '@/components/generic/AuthForm/AuthForm';
-import { Pages } from '@/constants/pages.constants';
-import { setCredentials } from '@/store/auth/auth.slice';
-import { useAppDispatch } from '@/store/store';
-import { IError } from '@/types/error';
+import { useSignUpMutation } from '../../api/auth.api';
+import AuthForm from '../../components/generic/AuthForm';
+import { ISubmitAuthFormParams } from '../../components/generic/AuthForm/AuthForm';
+import { Pages } from '../../constants/pages.constants';
+import { setCredentials } from '../../store/auth/auth.slice';
+import { useAppDispatch } from '../../store/store';
+import { IError } from '../../types/error';
 
 const SignUp: React.FC = () => {
   const dispatch = useAppDispatch();

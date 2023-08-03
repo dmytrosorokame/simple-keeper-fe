@@ -1,10 +1,10 @@
 import { Formik } from 'formik';
 import React from 'react';
 
-import Input from '@/components/shared/Input';
-import LoadingButton from '@/components/shared/LoadingButton/LoadingButton';
-import { resetPasswordValidationSchema } from '@/constants/validation/reset-password.schema';
-import { IResetPasswordFormValues } from '@/types/forms';
+import { resetPasswordValidationSchema } from '../../../../constants/validation/reset-password.schema';
+import { IResetPasswordFormValues } from '../../../../types/forms';
+import Input from '../../../shared/Input';
+import LoadingButton from '../../../shared/LoadingButton';
 
 const initialValues: IResetPasswordFormValues = {
   email: '',

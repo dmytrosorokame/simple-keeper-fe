@@ -1,14 +1,14 @@
 import { Formik } from 'formik';
 import React, { useMemo } from 'react';
 
-import { useGetAllCategoriesQuery } from '@/api/category.api';
-import Input from '@/components/shared/Input';
-import LoadingButton from '@/components/shared/LoadingButton/LoadingButton';
-import Select from '@/components/shared/Select';
-import { DEFAULT_CATEGORY_OPTION } from '@/constants/category.constants';
-import { addExpenseValidationSchema } from '@/constants/validation/add-expense.schema';
-import { IAddExpenseFormValues } from '@/types/forms';
-import { prepareCategoriesOptions } from '@/utils/prepareCategoriesOptions';
+import { useGetAllCategoriesQuery } from '../../../../api/category.api';
+import { DEFAULT_CATEGORY_OPTION } from '../../../../constants/category.constants';
+import { addExpenseValidationSchema } from '../../../../constants/validation/add-expense.schema';
+import { IAddExpenseFormValues } from '../../../../types/forms';
+import { prepareCategoriesOptions } from '../../../../utils/prepareCategoriesOptions';
+import Input from '../../../shared/Input';
+import LoadingButton from '../../../shared/LoadingButton';
+import Select from '../../../shared/Select';
 
 const initialValues: IAddExpenseFormValues = {
   amount: 0,

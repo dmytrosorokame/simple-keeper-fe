@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IIconProps } from '@/types/common';
+import { IIconProps } from '../../../types/common';
 
 const Loader: React.FC<IIconProps> = ({ className }) => (
   <>

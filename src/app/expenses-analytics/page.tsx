@@ -4,15 +4,15 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useCallback, useMemo } from 'react';
 
-import { useGetAllExpensesQuery } from '@/api/expense.api';
-import withAuth from '@/components/hocs/WithAuth';
-import ExpensesChart from '@/components/pages/expense/ExpensesChart';
-import Button from '@/components/shared/Button';
-import Loader from '@/components/shared/Loader/Loader';
-import { calculateTotalSpend } from '@/utils/calculateTotalSpend';
-import { groupExpensesByCategory } from '@/utils/groupExpensesByCategory';
-import { groupExpensesByMonth } from '@/utils/groupExpensesByMonth';
-import { sortExpensesBySpend } from '@/utils/sortExpensesBySpend';
+import { useGetAllExpensesQuery } from '../../api/expense.api';
+import WithAuth from '../../components/hocs/WithAuth';
+import ExpensesChart from '../../components/pages/expense/ExpensesChart';
+import Button from '../../components/shared/Button';
+import Loader from '../../components/shared/Loader';
+import { calculateTotalSpend } from '../../utils/calculateTotalSpend';
+import { groupExpensesByCategory } from '../../utils/groupExpensesByCategory';
+import { groupExpensesByMonth } from '../../utils/groupExpensesByMonth';
+import { sortExpensesBySpend } from '../../utils/sortExpensesBySpend';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -85,4 +85,4 @@ const ExpensesAnalytics: React.FC = () => {
   );
 };
 
-export default withAuth(ExpensesAnalytics);
+export default WithAuth(ExpensesAnalytics);
