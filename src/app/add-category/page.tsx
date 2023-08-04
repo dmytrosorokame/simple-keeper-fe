@@ -5,6 +5,7 @@ import React, { useCallback } from 'react';
 import { toast } from 'react-toastify';
 
 import { useCreateCategoryMutation } from '../../api/category.api';
+import WithAuth from '../../components/hocs/WithAuth';
 import AddCategoryForm from '../../components/pages/expense/AddCategoryForm';
 import Button from '../../components/shared/Button';
 import { IAddCategoryFormValues } from '../../types/forms';
@@ -46,4 +47,4 @@ const AddCategory: React.FC = () => {
   );
 };
 
-export default withAuth(AddCategory);
+export default WithAuth(AddCategory);
