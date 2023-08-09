@@ -9,7 +9,7 @@ module.exports = {
   globals: {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: true,
   },
-  plugins: ['react-hooks', 'import', 'unused-imports', 'jsx-a11y', 'no-relative-import-paths'],
+  plugins: ['react-hooks', 'import', 'unused-imports', 'jsx-a11y'],
   parserOptions: {
     ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
     sourceType: 'module', // Allows for the use of imports
