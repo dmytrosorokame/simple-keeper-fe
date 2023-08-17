@@ -7,6 +7,6 @@ export enum Pages {
   CATEGORIES = '/categories',
   ADD_EXPENSE = '/add-expense',
   ADD_CATEGORY = '/add-category',
-  EXPENSE_DETAILS = '/expense-defailt',
+  EXPENSE_DETAILS = '/expense-details',
   EXPENSES_ANALYTICS = '/expenses-analytics',
 }
